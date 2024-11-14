@@ -1,0 +1,426 @@
+.container {
+    text-align: left;
+    width: 1260px;
+    margin: 0 auto;
+    font-family: 'Tahoma', sans-serif;
+}
+.dajar-logo {
+    display: block;
+    margin: 10px 0 0 auto;
+    height: 45px;
+    width: 154px;
+}
+.navigation {
+    margin: 10px auto 10px 0;
+}
+.navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.navigation ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    background-color: black;
+    padding: 30px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.burger-menu-icon {
+    font-size: 48px;
+    font-weight: bold;
+    cursor: pointer;
+    position: fixed;
+    text-align: center;
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    color: white;
+    z-index: 9999;
+    border-radius: 5px;
+    display: none;
+}
+.operator {
+    background-color: #ddd;
+    padding: 8px;
+    font-size: 24px;
+}
+.operator select {
+    font-size: 24px;
+}
+.mb-20 {
+    margin-bottom: 50px;
+}
+.login {
+    font-size: 24px;
+}
+.login input {
+    font-size: 24px;
+}
+.input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 35%;
+    margin: 0 auto 8px;
+    padding: 5px;
+}
+.button {
+    display: block;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 100%;
+}
+.content {
+    width: 100%;
+    background-color: #bbb;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around
+}
+.legend {
+    display: flex;
+    flex-direction: row;
+}
+.address-przyjecie-input-container {
+    display: flex;
+    justify-content: space-between;
+}
+.address-przyjecie-input-container-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.address-przyjecie-controls {
+    display: flex;
+    justify-content: space-between;
+}
+.address-reczne-controls {
+    display: flex;
+    justify-content: space-between;
+}
+.address-reczne-address-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: end;
+    padding: 15px;
+}
+.address-reczne-address-controls select {
+    width: 100px;
+    font-size: 24px;
+}
+.address-buttons-table table tr {
+    display: block;
+    margin-bottom: 10px;
+}
+.address-buttons-table table tr:hover {
+    filter: none
+}
+.flex-vertical {
+    display: flex;
+    flex-direction: column;
+}
+.address-wymag-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.address-wymag-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.address-pobranie-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.address-zlozenie-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.storage-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.address-auto-braki-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.tile-img {
+    width: 200px;
+}
+.index-tile {
+    background-color: #ccc;
+    width: 200px;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 18px;
+    gap: 10px;
+    margin: auto;
+    cursor: pointer;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+}
+#main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.index-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px auto 0;
+    width: auto;
+}
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.index-container hr {
+    width: 100%;
+    border: 1px solid black;
+    opacity: 30%;
+}
+.table-mobile {
+    margin-bottom: 20px;
+}
+.package-flex-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.package-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    margin-top: 15px;
+    border: 1px solid black;
+}
+.package-row {
+    display: flex;
+    justify-content: space-between;
+}
+tr:hover {
+    filter: brightness(0.8);
+}
+#TBROW_DDLFirma {
+    flex-wrap: wrap;
+}
+
+@media(max-width: 1100px) {
+    .container {
+        width: 100%;
+    }
+    .burger-menu-icon {
+        display: block;
+    }
+    .navigation ul {
+        flex-direction: column;
+        display: none;
+        position: fixed;
+        top: 0px;
+        right: 0;
+        z-index: 9999;
+    }
+    .navigation ul li {
+        margin: 0;
+        padding: 1px;
+        text-align: center;
+        width: 100%;
+        border-radius: 5px;
+    }
+    .navigation ul li a {
+        font-size: 20px;
+        text-decoration: none;
+        color: white;
+        border-radius: 5px;
+        width: 100%;
+    }
+    .navigation ul.active {
+        display: flex;
+    }
+    .login {
+        width: 100%;
+        font-size: 20px;
+    }
+    .input {
+        width: 100%;
+    }
+    .input .inputField, input, select {
+        width: 60%;
+        font-size: 18px;
+    }
+    .input input {
+        width: 60%;
+        font-size: 18px;
+    }
+    .input .button {
+        width: 100%;
+    }
+    .content {
+        flex-direction: column;
+    }
+    .content-operator {
+        border-bottom: 1px solid black;
+        padding-bottom: 5px;
+        margin: 5px;
+    }
+    .operator {
+        font-size: 18px;
+    }
+    .operator select {
+        font-size: 18px;
+    }
+    .legend {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    .plus-minus {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    .details-button {
+        margin-bottom: 10px;
+    }
+    .stany-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .address-przyjecie-input-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .address-przyjecie-controls {
+        flex-direction: column;
+        justify-content: start;
+    }
+    .address-reczne-controls {
+        flex-direction: column;
+        justify-content: start;
+        gap: 10px;
+    }
+    .address-reczne-address-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .address-reczne-address-controls-input {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .address-wymag-filter {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .address-wymag-footer-legend {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .address-wymag-footer-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .address-wymag-footer {
+        gap: 10px;      
+    }
+    .address-zlozenie-filter {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .storage-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .address-auto-braki-search {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .index-container {
+        width: 100%;
+        margin-top: revert;
+        gap: 10px;
+    }
+    .logo {
+        width: 70%;
+    }
+
+    .package-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .package-row-item {
+        border-bottom: 1px solid black;
+        padding-bottom: 10px;
+    }
+    #main {
+        flex-direction: column;
+        height: auto;
+        margin-top: revert;
+    }
+
+    .table-mobile table,
+    .table-mobile thead,
+    .table-mobile tbody,
+    .table-mobile th,
+    .table-mobile td,
+    .table-mobile tr {
+        display: block;
+    }
+    .table-mobile tbody tr:first-child {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        font-family: serif;
+    }
+    .table-mobile td {
+        border: none;
+        border-bottom: 2px solid rgba(0, 0, 0, .15);
+        position: relative;
+        padding-left: 50%;
+        font-weight: bold;
+    }
+    .table-mobile td:last-child {
+        border-bottom: 6px solid black;
+    }
+    .table-mobile tr:last-child td:last-child {
+        border-bottom: none;
+    }
+    .table-mobile td:before {
+        position: absolute;
+        top: 0;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        content: attr(data-label);
+    }
+}

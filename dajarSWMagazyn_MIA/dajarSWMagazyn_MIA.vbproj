@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7B3E506D-C873-48EF-A048-172EC0989DF6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>dajarSWMagazyn_MIA</RootNamespace>
+    <AssemblyName>dajarSWMagazyn_MIA</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>dajarSWMagazyn_MIA.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>dajarSWMagazyn_MIA.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.bouncy-castle-connector, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.bouncy-castle-connector.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.commons, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.commons.8.0.4\lib\net461\itext.commons.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfua, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.pdfua.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=8.0.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.4\lib\net461\itext.svg.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.5.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.5.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Neodynamic.SDK.WebClientPrint, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Neodynamic.SDK.WebClientPrint.6.0.0\lib\netstandard2.0\Neodynamic.SDK.WebClientPrint.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.23.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.23.5.1\lib\net472\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.OracleClient">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.1\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Formats.Asn1, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Asn1.8.0.1\lib\net462\System.Formats.Asn1.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.6.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.4\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="index.aspx" />
+    <None Include="My Project\PublishProfiles\SWM_PROD.pubxml" />
+    <None Include="My Project\PublishProfiles\SWM_TEST.pubxml" />
+    <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Oracle.ManagedDataAccess.Client.Configuration.Section.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <Content Include="PrintPDFHandler.ashx" />
+    <None Include="Scripts\jquery-3.6.3.intellisense.js" />
+    <Content Include="Readme.txt" />
+    <Content Include="Scripts\jquery-3.6.3.js" />
+    <Content Include="Scripts\jquery-3.6.3.min.js" />
+    <Content Include="Scripts\jquery-3.6.3.slim.js" />
+    <Content Include="Scripts\jquery-3.6.3.slim.min.js" />
+    <Content Include="Scripts\jquery-3.6.3.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.3.min.map" />
+    <None Include="Service References\GService\configuration91.svcinfo" />
+    <None Include="Service References\GService\configuration.svcinfo" />
+    <Content Include="Scripts\table-script.js" />
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.Currency.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.HealhtyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfAddServiceRequestArrayOfAddServicepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfDeleteShipmentRequestDeleteShipmentResponsepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfDeliveryRoutingRequestDeliveryRoutingpMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfExportRequestExportpMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfLabelRequestLabelResponsepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfOrderRequestOrderpMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfPickupInfoRequestPickupInfoResponsepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfPickupListRequestPickupListResponsepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfPickUpRequestPickUppMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfRangeDetailRequestRangeDetailResponsepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfRangeRequestRangepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfRouteTableRequestArrayOfRouteTablepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfServiceRequestArrayOfServicepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfShipmentReqeustShipmentpMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfShipmentRequestArrayOfShipmentResponsepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfShipmentStatusRequestArrayOfShipmentStatusResponsepMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfStatusRequestArrayOfStatuspMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\GService\dajarSWMagazyn_MIA.GService.ResponseOfWrapRequestArrayOfWrappMtQ0fwN.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\GService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <Content Include="style.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Service References\GService\GService.wsdl" />
+    <Content Include="WebClientPrintAPI.ashx" />
+    <Content Include="Web References\pl.com.dhl24_parcelshop\CreateShipmentResponseStructure.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop\DeleteShipmentResponseStructure.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop\GetNearestServicepointsResponseStructure.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop\GetNearestTerminalServicepointsResponseStructure.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop\LabelStructure.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop.sandbox\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop.sandbox\CreateShipmentResponseStructure1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop.sandbox\DeleteShipmentResponseStructure1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop.sandbox\GetNearestServicepointsResponseStructure1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop.sandbox\GetNearestTerminalServicepointsResponseStructure1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24_parcelshop.sandbox\LabelStructure1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\CreateReturnShipmentResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\CreateShipmentResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\DeleteNotification.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\DeleteShipmentResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\pl.com.dhl24.sandbox\DHL24Webapi.wsdl" />
+    <Content Include="Web References\pl.com.dhl24.sandbox\GetInternationalParamsResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\GetNearestServicepointsResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\GetPieceIdResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\GetPip2Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\GetPriceResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\GetReturnParamsResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\GetRoutingResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\ItemToLabelDataResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\ItemToPrintResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\PnpResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\PostalCodeServicesResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\ScanToPrintResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\ShipmentBasicData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\pl.com.dhl24.sandbox\TrackAndTraceResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\pl.com.dhl24_parcelshop.sandbox\ServicePointMethods.wsdl" />
+    <None Include="Web References\pl.com.dhl24_parcelshop\ServicePointMethods.wsdl">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="admin.aspx.designer.vb">
+      <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin.aspx.vb">
+      <DependentUpon>admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="change_pass.aspx.designer.vb">
+      <DependentUpon>change_pass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="change_pass.aspx.vb">
+      <DependentUpon>change_pass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_print.aspx.designer.vb">
+      <DependentUpon>a_print.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_print.aspx.vb">
+      <DependentUpon>a_print.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_history.aspx.designer.vb">
+      <DependentUpon>a_history.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_history.aspx.vb">
+      <DependentUpon>a_history.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_logout.aspx.designer.vb">
+      <DependentUpon>a_logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_logout.aspx.vb">
+      <DependentUpon>a_logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_dyspo.aspx.designer.vb">
+      <DependentUpon>a_dyspo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_dyspo.aspx.vb">
+      <DependentUpon>a_dyspo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_magazyn.aspx.designer.vb">
+      <DependentUpon>a_magazyn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_magazyn.aspx.vb">
+      <DependentUpon>a_magazyn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_pakowanie.aspx.designer.vb">
+      <DependentUpon>a_pakowanie.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_pakowanie.aspx.vb">
+      <DependentUpon>a_pakowanie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_dyspo_ext.aspx.designer.vb">
+      <DependentUpon>a_dyspo_ext.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_dyspo_ext.aspx.vb">
+      <DependentUpon>a_dyspo_ext.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_label.aspx.designer.vb">
+      <DependentUpon>a_label.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_label.aspx.vb">
+      <DependentUpon>a_label.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_labelEdit.aspx.designer.vb">
+      <DependentUpon>a_labelEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_labelEdit.aspx.vb">
+      <DependentUpon>a_labelEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_dubel.aspx.designer.vb">
+      <DependentUpon>a_dubel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_dubel.aspx.vb">
+      <DependentUpon>a_dubel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_adresy.aspx.designer.vb">
+      <DependentUpon>a_adresy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_adresy.aspx.vb">
+      <DependentUpon>a_adresy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_adresyAdd.aspx.designer.vb">
+      <DependentUpon>a_adresyAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_adresyAdd.aspx.vb">
+      <DependentUpon>a_adresyAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_adresyEdit.aspx.designer.vb">
+      <DependentUpon>a_adresyEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_adresyEdit.aspx.vb">
+      <DependentUpon>a_adresyEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="address.aspx.designer.vb">
+      <DependentUpon>address.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="address.aspx.vb">
+      <DependentUpon>address.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="address_pobranie.aspx.designer.vb">
+      <DependentUpon>address_pobranie.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="address_pobranie.aspx.vb">
+      <DependentUpon>address_pobranie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="address_zlozenie.aspx.designer.vb">
+      <DependentUpon>address_zlozenie.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="address_zlozenie.aspx.vb">
+      <DependentUpon>address_zlozenie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="address_przyjecie_mm.aspx.designer.vb">
+      <DependentUpon>address_przyjecie_mm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="address_przyjecie_mm.aspx.vb">
+      <DependentUpon>address_przyjecie_mm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="address_reczne.aspx.designer.vb">
+      <DependentUpon>address_reczne.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="address_reczne.aspx.vb">
+      <DependentUpon>address_reczne.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="address_wymag.aspx.designer.vb">
+      <DependentUpon>address_wymag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="address_wymag.aspx.vb">
+      <DependentUpon>address_wymag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="address_auto.aspx.designer.vb">
+      <DependentUpon>address_auto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="address_auto.aspx.vb">
+      <DependentUpon>address_auto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="address_auto_braki.aspx.designer.vb">
+      <DependentUpon>address_auto_braki.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="address_auto_braki.aspx.vb">
+      <DependentUpon>address_auto_braki.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dhl_parcelshop.vb" />
+    <Compile Include="dhl_parcel_de_package.vb" />
+    <Compile Include="DhlParcelDeRestAPI.vb" />
+    <Compile Include="geis_package.vb" />
+    <Compile Include="InpostRestAPI.vb" />
+    <Compile Include="inpost_package.vb" />
+    <Compile Include="PrintPDFHandler.ashx.vb">
+      <DependentUpon>PrintPDFHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="raport_stany.aspx.designer.vb">
+      <DependentUpon>raport_stany.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="raport_stany.aspx.vb">
+      <DependentUpon>raport_stany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dhlDESoapRequest.vb" />
+    <Compile Include="dhl_package.vb" />
+    <Compile Include="package.aspx.designer.vb">
+      <DependentUpon>package.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="package.aspx.vb">
+      <DependentUpon>package.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="remoteApp.vb" />
+    <Compile Include="Service References\dhlDEAPI\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\GService\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="UpsRestAPI.vb" />
+    <Compile Include="ups_de_package.vb" />
+    <Compile Include="Web References\pl.com.dhl24.sandbox\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\pl.com.dhl24_parcelshop.sandbox\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\pl.com.dhl24\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="a_manageEdit.aspx.designer.vb">
+      <DependentUpon>a_manageEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_manageEdit.aspx.vb">
+      <DependentUpon>a_manageEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_manage.aspx.designer.vb">
+      <DependentUpon>a_manage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_manage.aspx.vb">
+      <DependentUpon>a_manage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COM_SerialPort.vb" />
+    <Compile Include="storage.aspx.designer.vb">
+      <DependentUpon>storage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storage.aspx.vb">
+      <DependentUpon>storage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SendMail.vb" />
+    <Compile Include="a_userEdit.aspx.designer.vb">
+      <DependentUpon>a_userEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_userEdit.aspx.vb">
+      <DependentUpon>a_userEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_userAdd.aspx.designer.vb">
+      <DependentUpon>a_userAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_userAdd.aspx.vb">
+      <DependentUpon>a_userAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HashMd5.vb" />
+    <Compile Include="index.aspx.vb">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.designer.vb">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logged.aspx.designer.vb">
+      <DependentUpon>logged.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logged.aspx.vb">
+      <DependentUpon>logged.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.vb">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.vb">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.vb">
+      <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.vb">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MyFunction.vb">
+    </Compile>
+    <Compile Include="Site.Master.designer.vb">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.vb">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a_user.aspx.designer.vb">
+      <DependentUpon>a_user.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a_user.aspx.vb">
+      <DependentUpon>a_user.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web References\pl.com.dhl24_parcelshop\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebClientPrintAPI.ashx.vb">
+      <DependentUpon>WebClientPrintAPI.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dss.appcache" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Service References\dhlDEAPI\cis_base.xsd" />
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.BookPickupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.CancelPickupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.CreateShipmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.DeleteShipmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.DoManifestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.GetExportDocResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.GetLabelResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.GetManifestDDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.GetVersionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\dajarSWMagazyn_MIA.dhlDEAPI.UpdateShipmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\dhlDEAPI\geschaeftskundenversand-api-1.wsdl" />
+    <None Include="Service References\dhlDEAPI\is_base_de.xsd" />
+    <None Include="Web References\pl.com.dhl24\CreateShipmentResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\pl.com.dhl24\DeleteNotification.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\pl.com.dhl24\DeleteShipmentResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\pl.com.dhl24\DHL24Webapi.wsdl" />
+    <None Include="Web References\pl.com.dhl24\ItemToPrintResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\pl.com.dhl24\PnpResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\pl.com.dhl24\PostalCodeServicesResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\pl.com.dhl24\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\pl.com.dhl24\ScanToPrintResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\pl.com.dhl24\ShipmentBasicData.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\pl.com.dhl24\TrackAndTraceResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <Content Include="admin.aspx" />
+    <Content Include="change_pass.aspx" />
+    <Content Include="a_print.aspx" />
+    <Content Include="a_history.aspx" />
+    <Content Include="a_logout.aspx" />
+    <Content Include="a_dyspo.aspx" />
+    <Content Include="a_magazyn.aspx" />
+    <Content Include="a_pakowanie.aspx" />
+    <Content Include="a_dyspo_ext.aspx" />
+    <Content Include="a_label.aspx" />
+    <Content Include="a_labelEdit.aspx" />
+    <Content Include="a_dubel.aspx" />
+    <Content Include="a_adresy.aspx" />
+    <Content Include="a_adresyAdd.aspx" />
+    <Content Include="a_adresyEdit.aspx" />
+    <Content Include="address.aspx" />
+    <Content Include="address_pobranie.aspx" />
+    <Content Include="address_zlozenie.aspx" />
+    <Content Include="address_przyjecie_mm.aspx" />
+    <Content Include="address_reczne.aspx" />
+    <Content Include="address_wymag.aspx" />
+    <Content Include="address_auto.aspx" />
+    <Content Include="address_auto_braki.aspx" />
+    <Content Include="raport_stany.aspx" />
+    <Content Include="package.aspx" />
+    <None Include="Service References\dhlDEAPI\configuration.svcinfo" />
+    <None Include="Service References\dhlDEAPI\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <Content Include="a_manageEdit.aspx" />
+    <Content Include="a_manage.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="login.gif" />
+    <Content Include="storage.aspx" />
+    <Content Include="storage.gif" />
+    <Content Include="package.gif" />
+    <Content Include="a_userEdit.aspx" />
+    <Content Include="a_userAdd.aspx" />
+    <Content Include="Dajar_logo.png" />
+    <Content Include="logged.aspx" />
+    <Content Include="login.aspx" />
+    <Content Include="logout.aspx" />
+    <Content Include="Site.Master" />
+    <Content Include="a_user.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://dhl24.com.pl/servicepoint.html">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\pl.com.dhl24_parcelshop\</RelPath>
+      <UpdateFromURL>https://dhl24.com.pl/servicepoint.html</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>dajarSWMagazyn_MIA_pl_com_dhl24_parcelshop_ServicePointMethodsService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://dhl24.com.pl/webapi2.html">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\pl.com.dhl24\</RelPath>
+      <UpdateFromURL>https://dhl24.com.pl/webapi2.html</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>dajarSWMagazyn_MIA_pl_com_dhl24_DHL24WebapiService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://sandbox.dhl24.com.pl/servicepoint.html">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\pl.com.dhl24_parcelshop.sandbox\</RelPath>
+      <UpdateFromURL>https://sandbox.dhl24.com.pl/servicepoint.html</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>dajarSWMagazyn_MIA_pl_com_dhl24_sandbox_ServicePointMethodsService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://sandbox.dhl24.com.pl/webapi2.html">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\pl.com.dhl24.sandbox\</RelPath>
+      <UpdateFromURL>https://sandbox.dhl24.com.pl/webapi2.html</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>dajarSWMagazyn_MIA_pl_com_dhl24_sandbox_DHL24WebapiService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\dhlDEAPI\" />
+    <WCFMetadataStorage Include="Service References\GService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54101</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54200/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

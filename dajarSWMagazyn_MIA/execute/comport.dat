@@ -1,0 +1,10 @@
+PortName=COM1
+BaudRate=9600
+Parity=0
+DataBits=8
+StopBits=1
+Handshake=0
+RtsEnable=0
+NewLine=vbCrLf
+ReadTimeout=10000
+ReceivedBytesThreshold=1

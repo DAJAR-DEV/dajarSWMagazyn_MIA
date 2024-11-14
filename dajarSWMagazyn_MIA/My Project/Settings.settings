@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="dajarSWMagazyn_pl_com_dhl24_DHL24WebapiService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://dhl24.com.pl/webapi2/provider/service.html?ws=1</Value>
+    </Setting>
+    <Setting Name="dajarSWMagazyn_pl_geis_gservicetest_GService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://gservicetest.geis.pl/GService.svc</Value>
+    </Setting>
+    <Setting Name="dajarSWMagazyn_pl_com_dhl24_parcelshop_ServicePointMethodsService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://dhl24.com.pl/servicepoint/provider/service.html?ws=1</Value>
+    </Setting>
+    <Setting Name="dajarSWMagazyn_pl_com_dhl24_sandbox_ServicePointMethodsService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1</Value>
+    </Setting>
+    <Setting Name="dajarSWMagazyn_pl_com_dhl24_sandbox_DHL24WebapiService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

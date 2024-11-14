@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="ServicePointMethods" targetNamespace="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1">
+      <xsd:complexType name="AuthdataStructure">
+        <xsd:all>
+          <xsd:element name="username" nillable="true" type="xsd:string" />
+          <xsd:element name="password" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="AddressStructure">
+        <xsd:all>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postcode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ContactStructure">
+        <xsd:all>
+          <xsd:element name="personName" nillable="true" type="xsd:string" />
+          <xsd:element name="phoneNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="emailAddress" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PreavisoStructure">
+        <xsd:all>
+          <xsd:element name="personName" nillable="true" type="xsd:string" />
+          <xsd:element name="phoneNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="emailAddress" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="FullAddressDataStructure">
+        <xsd:all>
+          <xsd:element name="address" nillable="true" type="tns:AddressStructure" />
+          <xsd:element name="contact" nillable="true" type="tns:ContactStructure" />
+          <xsd:element name="preaviso" nillable="true" type="tns:PreavisoStructure" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReceiverAddressStructure">
+        <xsd:all>
+          <xsd:element name="addressType" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postcode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReceiverDataStructure">
+        <xsd:all>
+          <xsd:element name="address" nillable="true" type="tns:ReceiverAddressStructure" />
+          <xsd:element name="contact" nillable="true" type="tns:ContactStructure" />
+          <xsd:element name="preaviso" nillable="true" type="tns:PreavisoStructure" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ShipStructure">
+        <xsd:all>
+          <xsd:element name="shipper" nillable="true" type="tns:FullAddressDataStructure" />
+          <xsd:element name="receiver" nillable="true" type="tns:ReceiverDataStructure" />
+          <xsd:element name="servicePointAccountNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="BillingStructure">
+        <xsd:all>
+          <xsd:element name="shippingPaymentType" nillable="true" type="xsd:string" />
+          <xsd:element name="billingAccountNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="paymentType" nillable="true" type="xsd:string" />
+          <xsd:element name="costsCenter" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ServiceStructure">
+        <xsd:all>
+          <xsd:element name="serviceType" nillable="true" type="xsd:string" />
+          <xsd:element name="serviceValue" nillable="true" type="xsd:string" />
+          <xsd:element name="textInstruction" nillable="true" type="xsd:string" />
+          <xsd:element name="collectOnDeliveryForm" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfServicestructure">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ServiceStructure" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ShipmentInfoStructure">
+        <xsd:all>
+          <xsd:element name="dropOffType" nillable="true" type="xsd:string" />
+          <xsd:element name="serviceType" nillable="true" type="xsd:string" />
+          <xsd:element name="billing" nillable="true" type="tns:BillingStructure" />
+          <xsd:element name="specialServices" nillable="true" type="tns:ArrayOfServicestructure" />
+          <xsd:element name="shipmentDate" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentStartHour" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentEndHour" nillable="true" type="xsd:string" />
+          <xsd:element name="labelType" nillable="true" type="xsd:string" />
+          <xsd:element name="wayBill" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PieceStructure">
+        <xsd:all>
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+          <xsd:element name="width" nillable="true" type="xsd:int" />
+          <xsd:element name="height" nillable="true" type="xsd:int" />
+          <xsd:element name="lenght" nillable="true" type="xsd:int" />
+          <xsd:element name="weight" nillable="true" type="xsd:int" />
+          <xsd:element name="quantity" nillable="true" type="xsd:int" />
+          <xsd:element name="nonStandard" nillable="true" type="xsd:boolean" />
+          <xsd:element name="blpPieceId" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPiecestructure">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:PieceStructure" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ShipmentStructure">
+        <xsd:all>
+          <xsd:element name="ship" nillable="true" type="tns:ShipStructure" />
+          <xsd:element name="shipmentInfo" nillable="true" type="tns:ShipmentInfoStructure" />
+          <xsd:element name="pieceList" nillable="true" type="tns:ArrayOfPiecestructure" />
+          <xsd:element name="content" nillable="true" type="xsd:string" />
+          <xsd:element name="comment" nillable="true" type="xsd:string" />
+          <xsd:element name="reference" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="CreateShipmentStructure">
+        <xsd:all>
+          <xsd:element name="authData" nillable="true" type="tns:AuthdataStructure" />
+          <xsd:element name="shipmentData" nillable="true" type="tns:ShipmentStructure" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="createShipment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="shipment" nillable="true" type="tns:CreateShipmentStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="LabelStructure">
+        <xsd:all>
+          <xsd:element name="labelType" nillable="true" type="xsd:string" />
+          <xsd:element name="labelFormat" nillable="true" type="xsd:string" />
+          <xsd:element name="labelContent" nillable="true" type="xsd:string" />
+          <xsd:element name="labelName" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="CreateShipmentResponseStructure">
+        <xsd:all>
+          <xsd:element name="shipmentNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="label" nillable="true" type="tns:LabelStructure" />
+          <xsd:element name="dispatchNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="createShipmentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createShipmentResult" type="tns:CreateShipmentResponseStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="DeleteShipmentStructure">
+        <xsd:all>
+          <xsd:element name="authData" nillable="true" type="tns:AuthdataStructure" />
+          <xsd:element name="shipment" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="deleteShipment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="shipment" nillable="true" type="tns:DeleteShipmentStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="DeleteShipmentResponseStructure">
+        <xsd:all>
+          <xsd:element name="status" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="deleteShipmentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="deleteShipmentResult" type="tns:DeleteShipmentResponseStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="GetLabelStructure">
+        <xsd:all>
+          <xsd:element name="authData" nillable="true" type="tns:AuthdataStructure" />
+          <xsd:element name="shipment" nillable="true" type="xsd:string" />
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getLabel">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="structure" nillable="true" type="tns:GetLabelStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getLabelResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getLabelResult" type="tns:LabelStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="GetPnpStructure">
+        <xsd:all>
+          <xsd:element name="authData" nillable="true" type="tns:AuthdataStructure" />
+          <xsd:element name="shipmentDate" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getPnp">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="structure" nillable="true" type="tns:GetPnpStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPnpResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getPnpResult" type="tns:LabelStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="GetNearestServicepointsStructure">
+        <xsd:all>
+          <xsd:element name="authData" nillable="true" type="tns:AuthdataStructure" />
+          <xsd:element name="postcode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="radius" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getNearestServicepoints">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="structure" nillable="true" type="tns:GetNearestServicepointsStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="SearchAddressStructure">
+        <xsd:all>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postcode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PointStructure">
+        <xsd:all>
+          <xsd:element name="address" nillable="true" type="tns:SearchAddressStructure" />
+          <xsd:element name="description" nillable="true" type="xsd:string" />
+          <xsd:element name="longitude" nillable="true" type="xsd:string" />
+          <xsd:element name="latitude" nillable="true" type="xsd:string" />
+          <xsd:element name="sap" nillable="true" type="xsd:string" />
+          <xsd:element name="monOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="monClose" nillable="true" type="xsd:string" />
+          <xsd:element name="tueOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="tueClose" nillable="true" type="xsd:string" />
+          <xsd:element name="wedOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="wedClose" nillable="true" type="xsd:string" />
+          <xsd:element name="thuOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="thuClose" nillable="true" type="xsd:string" />
+          <xsd:element name="friOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="friClose" nillable="true" type="xsd:string" />
+          <xsd:element name="satOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="satClose" nillable="true" type="xsd:string" />
+          <xsd:element name="sunOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="sunClose" nillable="true" type="xsd:string" />
+          <xsd:element name="workInHoliday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPointstructure">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:PointStructure" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetNearestServicepointsResponseStructure">
+        <xsd:all>
+          <xsd:element name="points" nillable="true" type="tns:ArrayOfPointstructure" />
+          <xsd:element name="count" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getNearestServicepointsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getNearestServicepointsResult" type="tns:GetNearestServicepointsResponseStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="GetNearestTerminalServicepointsStructure">
+        <xsd:all>
+          <xsd:element name="authData" nillable="true" type="tns:AuthdataStructure" />
+          <xsd:element name="postcode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="radius" nillable="true" type="xsd:int" />
+          <xsd:element name="toForeignPs" nillable="true" type="xsd:boolean" />
+          <xsd:element name="toPm" nillable="true" type="xsd:boolean" />
+          <xsd:element name="withCOD" nillable="true" type="xsd:boolean" />
+          <xsd:element name="limit" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getNearestTerminalServicepoints">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="structure" nillable="true" type="tns:GetNearestTerminalServicepointsStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="TerminalPointStructure">
+        <xsd:all>
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+          <xsd:element name="address" nillable="true" type="tns:SearchAddressStructure" />
+          <xsd:element name="description" nillable="true" type="xsd:string" />
+          <xsd:element name="longitude" nillable="true" type="xsd:string" />
+          <xsd:element name="latitude" nillable="true" type="xsd:string" />
+          <xsd:element name="sap" nillable="true" type="xsd:string" />
+          <xsd:element name="monOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="monClose" nillable="true" type="xsd:string" />
+          <xsd:element name="tueOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="tueClose" nillable="true" type="xsd:string" />
+          <xsd:element name="wedOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="wedClose" nillable="true" type="xsd:string" />
+          <xsd:element name="thuOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="thuClose" nillable="true" type="xsd:string" />
+          <xsd:element name="friOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="friClose" nillable="true" type="xsd:string" />
+          <xsd:element name="satOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="satClose" nillable="true" type="xsd:string" />
+          <xsd:element name="sunOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="sunClose" nillable="true" type="xsd:string" />
+          <xsd:element name="workInHoliday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="saturdayDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="isLm" nillable="true" type="xsd:boolean" />
+          <xsd:element name="isFm" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTerminalpointstructure">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:TerminalPointStructure" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetNearestTerminalServicepointsResponseStructure">
+        <xsd:all>
+          <xsd:element name="points" nillable="true" type="tns:ArrayOfTerminalpointstructure" />
+          <xsd:element name="count" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getNearestTerminalServicepointsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getNearestTerminalServicepointsResult" type="tns:GetNearestTerminalServicepointsResponseStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getNearestServicepointsCOD">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="structure" nillable="true" type="tns:GetNearestServicepointsStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getNearestServicepointsCODResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getNearestServicepointsCODResult" type="tns:GetNearestServicepointsResponseStructure" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="createShipmentIn">
+    <wsdl:part name="parameters" element="tns:createShipment" />
+  </wsdl:message>
+  <wsdl:message name="createShipmentOut">
+    <wsdl:part name="parameters" element="tns:createShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteShipmentIn">
+    <wsdl:part name="parameters" element="tns:deleteShipment" />
+  </wsdl:message>
+  <wsdl:message name="deleteShipmentOut">
+    <wsdl:part name="parameters" element="tns:deleteShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLabelIn">
+    <wsdl:part name="parameters" element="tns:getLabel" />
+  </wsdl:message>
+  <wsdl:message name="getLabelOut">
+    <wsdl:part name="parameters" element="tns:getLabelResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPnpIn">
+    <wsdl:part name="parameters" element="tns:getPnp" />
+  </wsdl:message>
+  <wsdl:message name="getPnpOut">
+    <wsdl:part name="parameters" element="tns:getPnpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNearestServicepointsIn">
+    <wsdl:part name="parameters" element="tns:getNearestServicepoints" />
+  </wsdl:message>
+  <wsdl:message name="getNearestServicepointsOut">
+    <wsdl:part name="parameters" element="tns:getNearestServicepointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNearestTerminalServicepointsIn">
+    <wsdl:part name="parameters" element="tns:getNearestTerminalServicepoints" />
+  </wsdl:message>
+  <wsdl:message name="getNearestTerminalServicepointsOut">
+    <wsdl:part name="parameters" element="tns:getNearestTerminalServicepointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNearestServicepointsCODIn">
+    <wsdl:part name="parameters" element="tns:getNearestServicepointsCOD" />
+  </wsdl:message>
+  <wsdl:message name="getNearestServicepointsCODOut">
+    <wsdl:part name="parameters" element="tns:getNearestServicepointsCODResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServicePointMethodsPort">
+    <wsdl:operation name="createShipment">
+      <documentation>Tworzenie przesylki</documentation>
+      <wsdl:input message="tns:createShipmentIn" />
+      <wsdl:output message="tns:createShipmentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteShipment">
+      <documentation>Usuwanie przesyłki</documentation>
+      <wsdl:input message="tns:deleteShipmentIn" />
+      <wsdl:output message="tns:deleteShipmentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLabel">
+      <documentation>Pobieranie etykiety przesyłki</documentation>
+      <wsdl:input message="tns:getLabelIn" />
+      <wsdl:output message="tns:getLabelOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPnp">
+      <documentation>Pobieranie raportu PNP danego dnia</documentation>
+      <wsdl:input message="tns:getPnpIn" />
+      <wsdl:output message="tns:getPnpOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNearestServicepoints">
+      <documentation>Pobieranie najbliższych punktów serwisowych typu Last Mile bez COD</documentation>
+      <wsdl:input message="tns:getNearestServicepointsIn" />
+      <wsdl:output message="tns:getNearestServicepointsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNearestTerminalServicepoints">
+      <documentation>Pobieranie najbliższych punktów serwisowych typu Last Mile bez COD z uwzględnieniem najbliższego terminala</documentation>
+      <wsdl:input message="tns:getNearestTerminalServicepointsIn" />
+      <wsdl:output message="tns:getNearestTerminalServicepointsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNearestServicepointsCOD">
+      <documentation>Pobieranie najbliższych punktów serwisowych typu Last Mile z COD</documentation>
+      <wsdl:input message="tns:getNearestServicepointsCODIn" />
+      <wsdl:output message="tns:getNearestServicepointsCODOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServicePointMethodsBinding" type="tns:ServicePointMethodsPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="createShipment">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1#createShipment" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteShipment">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1#deleteShipment" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLabel">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1#getLabel" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPnp">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1#getPnp" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNearestServicepoints">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1#getNearestServicepoints" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNearestTerminalServicepoints">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1#getNearestTerminalServicepoints" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNearestServicepointsCOD">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1#getNearestServicepointsCOD" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicePointMethodsService">
+    <wsdl:port name="ServicePointMethodsPort" binding="tns:ServicePointMethodsBinding">
+      <soap:address location="https://sandbox.dhl24.com.pl/servicepoint/provider/service.html?ws=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

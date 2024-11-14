@@ -1,0 +1,1975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="DHL24Webapi" targetNamespace="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1">
+      <xsd:element name="getVersion">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getVersionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getVersionResult" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="AuthData">
+        <xsd:all>
+          <xsd:element name="username" nillable="true" type="xsd:string" />
+          <xsd:element name="password" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="AddressData">
+        <xsd:all>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postalCode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="contactPerson" nillable="true" type="xsd:string" />
+          <xsd:element name="contactPhone" nillable="true" type="xsd:string" />
+          <xsd:element name="contactEmail" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReceiverAddressData">
+        <xsd:all>
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="isPackstation" nillable="true" type="xsd:boolean" />
+          <xsd:element name="isPostfiliale" nillable="true" type="xsd:boolean" />
+          <xsd:element name="postnummer" nillable="true" type="xsd:string" />
+          <xsd:element name="addressType" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postalCode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="contactPerson" nillable="true" type="xsd:string" />
+          <xsd:element name="contactPhone" nillable="true" type="xsd:string" />
+          <xsd:element name="contactEmail" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="NeighbourAddress">
+        <xsd:all>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postalCode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="contactPhone" nillable="true" type="xsd:string" />
+          <xsd:element name="contactEmail" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PieceDefinition">
+        <xsd:all>
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+          <xsd:element name="width" nillable="true" type="xsd:int" />
+          <xsd:element name="height" nillable="true" type="xsd:int" />
+          <xsd:element name="length" nillable="true" type="xsd:int" />
+          <xsd:element name="weight" nillable="true" type="xsd:float" />
+          <xsd:element name="quantity" nillable="true" type="xsd:int" />
+          <xsd:element name="nonStandard" nillable="true" type="xsd:boolean" />
+          <xsd:element name="blpPieceId" nillable="true" type="xsd:string" />
+          <xsd:element name="euroReturn" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPiecedefinition">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:PieceDefinition" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PaymentData">
+        <xsd:all>
+          <xsd:element name="paymentMethod" nillable="true" type="xsd:string" />
+          <xsd:element name="payerType" nillable="true" type="xsd:string" />
+          <xsd:element name="accountNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="costsCenter" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ServiceDefinition">
+        <xsd:all>
+          <xsd:element name="product" nillable="true" type="xsd:string" />
+          <xsd:element name="deliveryEvening" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliveryOnSaturday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="pickupOnSaturday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="collectOnDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="collectOnDeliveryValue" nillable="true" type="xsd:float" />
+          <xsd:element name="collectOnDeliveryForm" nillable="true" type="xsd:string" />
+          <xsd:element name="collectOnDeliveryReference" nillable="true" type="xsd:string" />
+          <xsd:element name="insurance" nillable="true" type="xsd:boolean" />
+          <xsd:element name="insuranceValue" nillable="true" type="xsd:float" />
+          <xsd:element name="returnOnDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="returnOnDeliveryReference" nillable="true" type="xsd:string" />
+          <xsd:element name="proofOfDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="selfCollect" nillable="true" type="xsd:boolean" />
+          <xsd:element name="predeliveryInformation" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliveryToNeighbour" nillable="true" type="xsd:boolean" />
+          <xsd:element name="preaviso" nillable="true" type="xsd:boolean" />
+          <xsd:element name="additionalService" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="CustomsItemData">
+        <xsd:all>
+          <xsd:element name="nameEn" nillable="true" type="xsd:string" />
+          <xsd:element name="namePl" nillable="true" type="xsd:string" />
+          <xsd:element name="quantity" nillable="true" type="xsd:string" />
+          <xsd:element name="weight" nillable="true" type="xsd:string" />
+          <xsd:element name="value" nillable="true" type="xsd:string" />
+          <xsd:element name="tariffCode" nillable="true" type="xsd:string" />
+          <xsd:element name="countryOfOrigin" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCustomsitemdata">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:CustomsItemData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CustomsAgreementData">
+        <xsd:all>
+          <xsd:element name="notExceedValue" nillable="true" type="xsd:boolean" />
+          <xsd:element name="notProhibitedGoods" nillable="true" type="xsd:boolean" />
+          <xsd:element name="notRestrictedGoods" nillable="true" type="xsd:boolean" />
+          <xsd:element name="invoiceContent" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="CustomsData">
+        <xsd:all>
+          <xsd:element name="customsType" nillable="true" type="xsd:string" />
+          <xsd:element name="firstName" nillable="true" type="xsd:string" />
+          <xsd:element name="secondaryName" nillable="true" type="xsd:string" />
+          <xsd:element name="costsOfShipment" nillable="true" type="xsd:string" />
+          <xsd:element name="currency" nillable="true" type="xsd:string" />
+          <xsd:element name="nipNr" nillable="true" type="xsd:string" />
+          <xsd:element name="eoriNr" nillable="true" type="xsd:string" />
+          <xsd:element name="vatRegistrationNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="eoriNrReceiver" nillable="true" type="xsd:string" />
+          <xsd:element name="vatRegistrationNumberReceiver" nillable="true" type="xsd:string" />
+          <xsd:element name="categoryOfItem" nillable="true" type="xsd:string" />
+          <xsd:element name="invoiceNr" nillable="true" type="xsd:string" />
+          <xsd:element name="invoice" nillable="true" type="xsd:string" />
+          <xsd:element name="invoiceDate" nillable="true" type="xsd:string" />
+          <xsd:element name="countryOfOrigin" nillable="true" type="xsd:string" />
+          <xsd:element name="additionalInfo" nillable="true" type="xsd:string" />
+          <xsd:element name="grossWeight" nillable="true" type="xsd:string" />
+          <xsd:element name="customsItem" nillable="true" type="tns:ArrayOfCustomsitemdata" />
+          <xsd:element name="customAgreements" nillable="true" type="tns:CustomsAgreementData" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ShipmentFullData">
+        <xsd:all>
+          <xsd:element name="shipper" nillable="true" type="tns:AddressData" />
+          <xsd:element name="receiver" nillable="true" type="tns:ReceiverAddressData" />
+          <xsd:element name="neighbour" nillable="true" type="tns:NeighbourAddress" />
+          <xsd:element name="pieceList" nillable="true" type="tns:ArrayOfPiecedefinition" />
+          <xsd:element name="payment" nillable="true" type="tns:PaymentData" />
+          <xsd:element name="service" nillable="true" type="tns:ServiceDefinition" />
+          <xsd:element name="shipmentDate" nillable="true" type="xsd:string" />
+          <xsd:element name="skipRestrictionCheck" type="xsd:boolean" />
+          <xsd:element name="comment" nillable="true" type="xsd:string" />
+          <xsd:element name="content" nillable="true" type="xsd:string" />
+          <xsd:element name="reference" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentId" nillable="true" type="xsd:int" />
+          <xsd:element name="created" nillable="true" type="xsd:string" />
+          <xsd:element name="orderStatus" nillable="true" type="xsd:string" />
+          <xsd:element name="customs" nillable="true" type="tns:CustomsData" />
+          <xsd:element name="wayBill" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfShipmentfulldata">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ShipmentFullData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="createShipments">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="shipments" nillable="true" type="tns:ArrayOfShipmentfulldata" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ShipmentBasicData">
+        <xsd:all>
+          <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+          <xsd:element name="created" nillable="true" type="xsd:string" />
+          <xsd:element name="shipper" nillable="true" type="tns:AddressData" />
+          <xsd:element name="receiver" nillable="true" type="tns:AddressData" />
+          <xsd:element name="orderStatus" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfShipmentbasicdata">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ShipmentBasicData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="createShipmentsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createShipmentsResult" type="tns:ArrayOfShipmentbasicdata" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ReturnItemToPrint">
+        <xsd:all>
+          <xsd:element name="labelType" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+          <xsd:element name="wayBill" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfReturnitemtoprint">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ReturnItemToPrint" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getReturnByWaybill">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" type="tns:AuthData" />
+            <xsd:element name="itemsToPrint" type="tns:ArrayOfReturnitemtoprint" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Label">
+        <xsd:all>
+          <xsd:element name="labelType" nillable="true" type="xsd:string" />
+          <xsd:element name="labelFormat" nillable="true" type="xsd:string" />
+          <xsd:element name="labelContent" nillable="true" type="xsd:string" />
+          <xsd:element name="cn23Content" nillable="true" type="xsd:string" />
+          <xsd:element name="cn23MimeType" nillable="true" type="xsd:string" />
+          <xsd:element name="fvProformaContent" nillable="true" type="xsd:string" />
+          <xsd:element name="fvProformaMimeType" nillable="true" type="xsd:string" />
+          <xsd:element name="fvProformaNumer" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="CreateShipmentResponse">
+        <xsd:all>
+          <xsd:element name="shipmentNotificationNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentTrackingNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="packagesTrackingNumbers" nillable="true" type="xsd:string" />
+          <xsd:element name="dispatchNotificationNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="label" nillable="true" type="tns:Label" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCreateshipmentresponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:CreateShipmentResponse" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getReturnByWaybillResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getReturnByWaybillResult" type="tns:ArrayOfCreateshipmentresponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Billing">
+        <xsd:all>
+          <xsd:element name="shippingPaymentType" nillable="true" type="xsd:string" />
+          <xsd:element name="billingAccountNumber" nillable="true" type="xsd:int" />
+          <xsd:element name="paymentType" nillable="true" type="xsd:string" />
+          <xsd:element name="costsCenter" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReturnService">
+        <xsd:all>
+          <xsd:element name="serviceType" nillable="true" type="xsd:string" />
+          <xsd:element name="serviceValue" nillable="true" type="xsd:float" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfReturnservice">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ReturnService" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ReturnShipmentTime">
+        <xsd:all>
+          <xsd:element name="labelExpDate" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReturnShipmentInfo">
+        <xsd:all>
+          <xsd:element name="wayBill" nillable="true" type="xsd:string" />
+          <xsd:element name="serviceType" nillable="true" type="xsd:string" />
+          <xsd:element name="bookCourier" nillable="true" type="xsd:boolean" />
+          <xsd:element name="billing" nillable="true" type="tns:Billing" />
+          <xsd:element name="specialServices" nillable="true" type="tns:ArrayOfReturnservice" />
+          <xsd:element name="shipmentTime" nillable="true" type="tns:ReturnShipmentTime" />
+          <xsd:element name="labelType" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PreavisoContact">
+        <xsd:all>
+          <xsd:element name="personName" nillable="true" type="xsd:string" />
+          <xsd:element name="phoneNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="emailAddress" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ShipperAddress">
+        <xsd:all>
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postalCode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReturnAddressat">
+        <xsd:all>
+          <xsd:element name="preaviso" nillable="true" type="tns:PreavisoContact" />
+          <xsd:element name="contact" nillable="true" type="tns:PreavisoContact" />
+          <xsd:element name="address" nillable="true" type="tns:ShipperAddress" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReturnShip">
+        <xsd:all>
+          <xsd:element name="shipper" nillable="true" type="tns:ReturnAddressat" />
+          <xsd:element name="receiver" nillable="true" type="tns:ReturnAddressat" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReturnPackage">
+        <xsd:all>
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+          <xsd:element name="weight" nillable="true" type="xsd:int" />
+          <xsd:element name="width" nillable="true" type="xsd:int" />
+          <xsd:element name="height" nillable="true" type="xsd:int" />
+          <xsd:element name="length" nillable="true" type="xsd:int" />
+          <xsd:element name="quantity" nillable="true" type="xsd:int" />
+          <xsd:element name="nonStandard" nillable="true" type="xsd:boolean" />
+          <xsd:element name="blpPieceId" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfReturnpackage">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ReturnPackage" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CreateReturnShipmentRequest">
+        <xsd:all>
+          <xsd:element name="shipmentInfo" nillable="true" type="tns:ReturnShipmentInfo" />
+          <xsd:element name="content" nillable="true" type="xsd:string" />
+          <xsd:element name="comment" nillable="true" type="xsd:string" />
+          <xsd:element name="reference" nillable="true" type="xsd:string" />
+          <xsd:element name="primaryWaybillNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="ship" nillable="true" type="tns:ReturnShip" />
+          <xsd:element name="pieceList" nillable="true" type="tns:ArrayOfReturnpackage" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="createShipmentReturn">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" type="tns:AuthData" />
+            <xsd:element name="shipment" type="tns:CreateReturnShipmentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="CreateReturnShipmentResponse">
+        <xsd:all>
+          <xsd:element name="shipmentNotificationNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentTrackingNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="packagesTrackingNumbers" nillable="true" type="xsd:string" />
+          <xsd:element name="dispatchNotificationNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="label" nillable="true" type="tns:Label" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfCreatereturnshipmentresponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:CreateReturnShipmentResponse" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="createShipmentReturnResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createShipmentReturnResult" type="tns:ArrayOfCreatereturnshipmentresponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ArrayOfString">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="deleteShipments">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="shipments" nillable="true" type="tns:ArrayOfString" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="DeleteNotification">
+        <xsd:all>
+          <xsd:element name="id" nillable="true" type="xsd:string" />
+          <xsd:element name="result" nillable="true" type="xsd:boolean" />
+          <xsd:element name="error" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfDeletenotification">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:DeleteNotification" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="deleteShipmentsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="deleteShipmentsResult" type="tns:ArrayOfDeletenotification" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMyShipments">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="createdFrom" nillable="true" type="xsd:string" />
+            <xsd:element name="createdTo" nillable="true" type="xsd:string" />
+            <xsd:element name="offset" nillable="true" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMyShipmentsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getMyShipmentsResult" type="tns:ArrayOfShipmentbasicdata" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMyShipmentsCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="createdFrom" nillable="true" type="xsd:string" />
+            <xsd:element name="createdTo" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMyShipmentsCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getMyShipmentsCountResult" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPostalCodeServices">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="postCode" nillable="true" type="xsd:string" />
+            <xsd:element name="pickupDate" nillable="true" type="xsd:string" />
+            <xsd:element name="city" nillable="true" type="xsd:string" />
+            <xsd:element name="street" nillable="true" type="xsd:string" />
+            <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+            <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="PostalCodeServicesResponse">
+        <xsd:all>
+          <xsd:element name="domesticExpress9" nillable="true" type="xsd:boolean" />
+          <xsd:element name="domesticExpress12" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliveryEvening" nillable="true" type="xsd:boolean" />
+          <xsd:element name="pickupOnSaturday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliverySaturday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="exPickupFrom" nillable="true" type="xsd:string" />
+          <xsd:element name="exPickupTo" nillable="true" type="xsd:string" />
+          <xsd:element name="drPickupFrom" nillable="true" type="xsd:string" />
+          <xsd:element name="drPickupTo" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getPostalCodeServicesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getPostalCodeServicesResult" type="tns:PostalCodeServicesResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getTrackAndTraceInfo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="TrackAndTraceEvent">
+        <xsd:all>
+          <xsd:element name="status" nillable="true" type="xsd:string" />
+          <xsd:element name="description" nillable="true" type="xsd:string" />
+          <xsd:element name="terminal" nillable="true" type="xsd:string" />
+          <xsd:element name="timestamp" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTrackandtraceevent">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:TrackAndTraceEvent" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TrackAndTraceResponse">
+        <xsd:all>
+          <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+          <xsd:element name="receivedBy" nillable="true" type="xsd:string" />
+          <xsd:element name="events" nillable="true" type="tns:ArrayOfTrackandtraceevent" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getTrackAndTraceInfoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getTrackAndTraceInfoResult" type="tns:TrackAndTraceResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ShipmentOrderInfo">
+        <xsd:all>
+          <xsd:element name="shipper" nillable="true" type="tns:AddressData" />
+          <xsd:element name="numberOfExPieces" nillable="true" type="xsd:int" />
+          <xsd:element name="numberOfDrPieces" nillable="true" type="xsd:int" />
+          <xsd:element name="totalWeight" nillable="true" type="xsd:int" />
+          <xsd:element name="heaviestPieceWeight" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="bookCourier">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="pickupDate" nillable="true" type="xsd:string" />
+            <xsd:element name="pickupTimeFrom" nillable="true" type="xsd:string" />
+            <xsd:element name="pickupTimeTo" nillable="true" type="xsd:string" />
+            <xsd:element name="additionalInfo" nillable="true" type="xsd:string" />
+            <xsd:element name="shipmentIdList" nillable="true" type="tns:ArrayOfString" />
+            <xsd:element name="shipmentOrderInfo" nillable="true" type="tns:ShipmentOrderInfo" />
+            <xsd:element name="courierWithLabel" nillable="true" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="bookCourierResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="bookCourierResult" type="tns:ArrayOfString" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cancelCourierBooking">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="orders" nillable="true" type="tns:ArrayOfString" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cancelCourierBookingResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cancelCourierBookingResult" type="tns:ArrayOfDeletenotification" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ItemToPrint">
+        <xsd:all>
+          <xsd:element name="labelType" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfItemtoprint">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ItemToPrint" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getLabels">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="itemsToPrint" nillable="true" type="tns:ArrayOfItemtoprint" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ItemToPrintResponse">
+        <xsd:all>
+          <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+          <xsd:element name="labelType" nillable="true" type="xsd:string" />
+          <xsd:element name="labelName" nillable="true" type="xsd:string" />
+          <xsd:element name="labelData" nillable="true" type="xsd:string" />
+          <xsd:element name="labelMimeType" nillable="true" type="xsd:string" />
+          <xsd:element name="cn23Data" nillable="true" type="xsd:string" />
+          <xsd:element name="cn23MimeType" nillable="true" type="xsd:string" />
+          <xsd:element name="fvProformaData" nillable="true" type="xsd:string" />
+          <xsd:element name="fvProformaMimeType" nillable="true" type="xsd:string" />
+          <xsd:element name="fvProformaNumer" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfItemtoprintresponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ItemToPrintResponse" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getLabelsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getLabelsResult" type="tns:ArrayOfItemtoprintresponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="PnpRequest">
+        <xsd:all>
+          <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+          <xsd:element name="date" nillable="true" type="xsd:string" />
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getPnp">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="pnpRequest" nillable="true" type="tns:PnpRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="PnpResponse">
+        <xsd:all>
+          <xsd:element name="fileName" nillable="true" type="xsd:string" />
+          <xsd:element name="fileData" nillable="true" type="xsd:string" />
+          <xsd:element name="fileMimeType" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getPnpResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getPnpResult" type="tns:PnpResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getShipmentScan">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ScanToPrintResponse">
+        <xsd:all>
+          <xsd:element name="scanData" nillable="true" type="xsd:string" />
+          <xsd:element name="scanMimeType" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getShipmentScanResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getShipmentScanResult" type="tns:ScanToPrintResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Service">
+        <xsd:all>
+          <xsd:element name="serviceType" nillable="true" type="xsd:string" />
+          <xsd:element name="serviceValue" nillable="true" type="xsd:float" />
+          <xsd:element name="textInstruction" nillable="true" type="xsd:string" />
+          <xsd:element name="collectOnDeliveryForm" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfService">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Service" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ShipmentTime">
+        <xsd:all>
+          <xsd:element name="shipmentDate" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentStartHour" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentEndHour" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ShipmentInfo">
+        <xsd:all>
+          <xsd:element name="wayBill" nillable="true" type="xsd:string" />
+          <xsd:element name="dropOffType" nillable="true" type="xsd:string" />
+          <xsd:element name="serviceType" nillable="true" type="xsd:string" />
+          <xsd:element name="billing" nillable="true" type="tns:Billing" />
+          <xsd:element name="specialServices" nillable="true" type="tns:ArrayOfService" />
+          <xsd:element name="shipmentTime" nillable="true" type="tns:ShipmentTime" />
+          <xsd:element name="labelType" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Address">
+        <xsd:all>
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postalCode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Addressat">
+        <xsd:all>
+          <xsd:element name="preaviso" nillable="true" type="tns:PreavisoContact" />
+          <xsd:element name="contact" nillable="true" type="tns:PreavisoContact" />
+          <xsd:element name="address" nillable="true" type="tns:Address" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReceiverAddress">
+        <xsd:all>
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="isPackstation" nillable="true" type="xsd:boolean" />
+          <xsd:element name="isPostfiliale" nillable="true" type="xsd:boolean" />
+          <xsd:element name="postnummer" nillable="true" type="xsd:string" />
+          <xsd:element name="addressType" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postalCode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReceiverAddressat">
+        <xsd:all>
+          <xsd:element name="preaviso" nillable="true" type="tns:PreavisoContact" />
+          <xsd:element name="contact" nillable="true" type="tns:PreavisoContact" />
+          <xsd:element name="address" nillable="true" type="tns:ReceiverAddress" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Ship">
+        <xsd:all>
+          <xsd:element name="shipper" nillable="true" type="tns:Addressat" />
+          <xsd:element name="receiver" nillable="true" type="tns:ReceiverAddressat" />
+          <xsd:element name="neighbour" nillable="true" type="tns:NeighbourAddress" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Package">
+        <xsd:all>
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+          <xsd:element name="euroReturn" nillable="true" type="xsd:boolean" />
+          <xsd:element name="weight" nillable="true" type="xsd:int" />
+          <xsd:element name="width" nillable="true" type="xsd:int" />
+          <xsd:element name="height" nillable="true" type="xsd:int" />
+          <xsd:element name="length" nillable="true" type="xsd:int" />
+          <xsd:element name="quantity" nillable="true" type="xsd:int" />
+          <xsd:element name="nonStandard" nillable="true" type="xsd:boolean" />
+          <xsd:element name="blpPieceId" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPackage">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Package" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CreateShipmentRequest">
+        <xsd:all>
+          <xsd:element name="shipmentInfo" nillable="true" type="tns:ShipmentInfo" />
+          <xsd:element name="content" nillable="true" type="xsd:string" />
+          <xsd:element name="comment" nillable="true" type="xsd:string" />
+          <xsd:element name="reference" nillable="true" type="xsd:string" />
+          <xsd:element name="ship" nillable="true" type="tns:Ship" />
+          <xsd:element name="pieceList" nillable="true" type="tns:ArrayOfPackage" />
+          <xsd:element name="customs" nillable="true" type="tns:CustomsData" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="createShipment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="shipment" nillable="true" type="tns:CreateShipmentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createShipmentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createShipmentResult" type="tns:CreateShipmentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="DeleteShipmentRequest">
+        <xsd:all>
+          <xsd:element name="shipmentIdentificationNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="dispatchIdentificationNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="deleteShipment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="shipment" nillable="true" type="tns:DeleteShipmentRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="DeleteShipmentResponse">
+        <xsd:all>
+          <xsd:element name="id" nillable="true" type="xsd:string" />
+          <xsd:element name="result" nillable="true" type="xsd:boolean" />
+          <xsd:element name="error" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="deleteShipmentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="deleteShipmentResult" type="tns:DeleteShipmentResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="GetNearestServicepointsRequest">
+        <xsd:all>
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="postcode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="radius" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getNearestServicepoints">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="structure" nillable="true" type="tns:GetNearestServicepointsRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="SearchAddress">
+        <xsd:all>
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postcode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Point">
+        <xsd:all>
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+          <xsd:element name="address" nillable="true" type="tns:SearchAddress" />
+          <xsd:element name="description" nillable="true" type="xsd:string" />
+          <xsd:element name="longitude" nillable="true" type="xsd:string" />
+          <xsd:element name="latitude" nillable="true" type="xsd:string" />
+          <xsd:element name="sap" nillable="true" type="xsd:string" />
+          <xsd:element name="monOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="monClose" nillable="true" type="xsd:string" />
+          <xsd:element name="tueOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="tueClose" nillable="true" type="xsd:string" />
+          <xsd:element name="wedOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="wedClose" nillable="true" type="xsd:string" />
+          <xsd:element name="thuOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="thuClose" nillable="true" type="xsd:string" />
+          <xsd:element name="friOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="friClose" nillable="true" type="xsd:string" />
+          <xsd:element name="satOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="satClose" nillable="true" type="xsd:string" />
+          <xsd:element name="sunOpen" nillable="true" type="xsd:string" />
+          <xsd:element name="sunClose" nillable="true" type="xsd:string" />
+          <xsd:element name="workInHoliday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPoint">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Point" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetNearestServicepointsResponse">
+        <xsd:all>
+          <xsd:element name="points" nillable="true" type="tns:ArrayOfPoint" />
+          <xsd:element name="count" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getNearestServicepointsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getNearestServicepointsResult" type="tns:GetNearestServicepointsResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getInternationalParams">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="InternationalParam">
+        <xsd:all>
+          <xsd:element name="countryName" nillable="true" type="xsd:string" />
+          <xsd:element name="countryNameEn" nillable="true" type="xsd:string" />
+          <xsd:element name="countryCode" nillable="true" type="xsd:string" />
+          <xsd:element name="product" nillable="true" type="xsd:string" />
+          <xsd:element name="pieceHeader" nillable="true" type="xsd:string" />
+          <xsd:element name="routing" nillable="true" type="xsd:string" />
+          <xsd:element name="code2l" nillable="true" type="xsd:string" />
+          <xsd:element name="pickupDays" nillable="true" type="xsd:int" />
+          <xsd:element name="courierMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="courierMaxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="courierMaxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="courierMaxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="courierMaxCod" nillable="true" type="xsd:int" />
+          <xsd:element name="courierCodCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="courierExchrate" nillable="true" type="xsd:float" />
+          <xsd:element name="courierNstAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="courierMaxNst" nillable="true" type="xsd:int" />
+          <xsd:element name="courierMaxGirth" nillable="true" type="xsd:int" />
+          <xsd:element name="packstationAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="packstationMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="packstationMaxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="packstationMaxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="packstationMaxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="postfilialeAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="postfilialeMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="postfilialeMaxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="postfilialeMaxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="postfilialeMaxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="zipFormat" nillable="true" type="xsd:string" />
+          <xsd:element name="identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="emailRequired" nillable="true" type="xsd:int" />
+          <xsd:element name="active" nillable="true" type="xsd:string" />
+          <xsd:element name="dutyProduct" nillable="true" type="xsd:string" />
+          <xsd:element name="dutyPickupDays" nillable="true" type="xsd:int" />
+          <xsd:element name="dutyPieceHeader" nillable="true" type="xsd:string" />
+          <xsd:element name="dutyMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="dutyMaxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="dutyMaxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="dutyMaxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="dutyNstAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="dutyMaxNst" nillable="true" type="xsd:int" />
+          <xsd:element name="dutyMaxGirth" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfInternationalparam">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:InternationalParam" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetInternationalParamsResponse">
+        <xsd:all>
+          <xsd:element name="params" nillable="true" type="tns:ArrayOfInternationalparam" />
+          <xsd:element name="count" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getInternationalParamsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getInternationalParamsResult" type="tns:GetInternationalParamsResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getReturnParams">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ReturnParam">
+        <xsd:all>
+          <xsd:element name="countryCode" nillable="true" type="xsd:string" />
+          <xsd:element name="product" nillable="true" type="xsd:string" />
+          <xsd:element name="pieceHeader" nillable="true" type="xsd:string" />
+          <xsd:element name="routing" nillable="true" type="xsd:string" />
+          <xsd:element name="code2l" nillable="true" type="xsd:string" />
+          <xsd:element name="courierAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="courierMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="courierMaxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="courierMaxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="courierMaxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="courierMaxCod" nillable="true" type="xsd:int" />
+          <xsd:element name="courierNstAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="maxNst" nillable="true" type="xsd:int" />
+          <xsd:element name="maxGirth" nillable="true" type="xsd:int" />
+          <xsd:element name="packstationAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="packstationMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="packstationMaxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="packstationMaxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="packstationNstAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="packstationMaxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="postfilialeAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="postfilialeMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="postfilialeMaxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="postfilialeMaxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="postfilialeNstAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="postfilialeMaxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="zipFormat" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfReturnparam">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ReturnParam" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetReturnParamsResponse">
+        <xsd:all>
+          <xsd:element name="params" nillable="true" type="tns:ArrayOfReturnparam" />
+          <xsd:element name="count" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getReturnParamsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getReturnParamsResult" type="tns:GetReturnParamsResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getInternationalParams2">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ReturnPip2Param">
+        <xsd:all>
+          <xsd:element name="customerType" nillable="true" type="xsd:string" />
+          <xsd:element name="elementType" nillable="true" type="xsd:string" />
+          <xsd:element name="pickUpDays" nillable="true" type="xsd:string" />
+          <xsd:element name="product" nillable="true" type="xsd:string" />
+          <xsd:element name="pieceHeader" nillable="true" type="xsd:string" />
+          <xsd:element name="routing" nillable="true" type="xsd:string" />
+          <xsd:element name="code" nillable="true" type="xsd:int" />
+          <xsd:element name="maxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="maxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="maxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="maxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="maxShipmentWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="maxShipmentPc" nillable="true" type="xsd:int" />
+          <xsd:element name="maxCod" nillable="true" type="xsd:int" />
+          <xsd:element name="codCurrency" nillable="true" type="xsd:string" />
+          <xsd:element name="exchRate" nillable="true" type="xsd:float" />
+          <xsd:element name="nst" nillable="true" type="xsd:boolean" />
+          <xsd:element name="maxNst" nillable="true" type="xsd:int" />
+          <xsd:element name="girth" nillable="true" type="xsd:int" />
+          <xsd:element name="packstation" nillable="true" type="xsd:boolean" />
+          <xsd:element name="psMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="psMaxLength" nillable="true" type="xsd:float" />
+          <xsd:element name="psMaxWidth" nillable="true" type="xsd:float" />
+          <xsd:element name="psMaxHeight" nillable="true" type="xsd:float" />
+          <xsd:element name="postfiliale" nillable="true" type="xsd:int" />
+          <xsd:element name="pfMaxWeight" nillable="true" type="xsd:float" />
+          <xsd:element name="pfMaxWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="pfMaxHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="pfMaxLength" nillable="true" type="xsd:int" />
+          <xsd:element name="zipFormat" nillable="true" type="xsd:string" />
+          <xsd:element name="active" nillable="true" type="xsd:boolean" />
+          <xsd:element name="identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="emailRec" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliveryMethod" nillable="true" type="xsd:string" />
+          <xsd:element name="deliveryOption" nillable="true" type="xsd:string" />
+          <xsd:element name="deliveryInfo" nillable="true" type="xsd:string" />
+          <xsd:element name="tntUrl" nillable="true" type="xsd:string" />
+          <xsd:element name="emailSen" nillable="true" type="xsd:boolean" />
+          <xsd:element name="mobPhoneRec" nillable="true" type="xsd:boolean" />
+          <xsd:element name="insuranceBase" nillable="true" type="xsd:int" />
+          <xsd:element name="insuranceMaxcashPln" nillable="true" type="xsd:int" />
+          <xsd:element name="zipformatInfo" nillable="true" type="xsd:string" />
+          <xsd:element name="printReceiversPhone" nillable="true" type="xsd:boolean" />
+          <xsd:element name="countryUe" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliveryOptionEn" nillable="true" type="xsd:string" />
+          <xsd:element name="deliveryInfoEn" nillable="true" type="xsd:string" />
+          <xsd:element name="zipformatInfoEn" nillable="true" type="xsd:string" />
+          <xsd:element name="countryCode3" nillable="true" type="xsd:string" />
+          <xsd:element name="mobPhoneSen" nillable="true" type="xsd:boolean" />
+          <xsd:element name="routeLabel" nillable="true" type="xsd:string" />
+          <xsd:element name="maxValue" nillable="true" type="xsd:int" />
+          <xsd:element name="productName" nillable="true" type="xsd:string" />
+          <xsd:element name="dutyIndividual" nillable="true" type="xsd:boolean" />
+          <xsd:element name="dutySimple" nillable="true" type="xsd:boolean" />
+          <xsd:element name="dhl24Available" nillable="true" type="xsd:boolean" />
+          <xsd:element name="dhl24FuAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="isbAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="psmAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="mobPhoneSpRec" nillable="true" type="xsd:boolean" />
+          <xsd:element name="emailSpRec" nillable="true" type="xsd:boolean" />
+          <xsd:element name="emailPlRec" nillable="true" type="xsd:boolean" />
+          <xsd:element name="mobPhonePlRec" nillable="true" type="xsd:boolean" />
+          <xsd:element name="podAvailable" nillable="true" type="xsd:boolean" />
+          <xsd:element name="minLength" nillable="true" type="xsd:int" />
+          <xsd:element name="minWidth" nillable="true" type="xsd:int" />
+          <xsd:element name="minHeight" nillable="true" type="xsd:int" />
+          <xsd:element name="fmNstKurier" nillable="true" type="xsd:boolean" />
+          <xsd:element name="adhocpickup" nillable="true" type="xsd:boolean" />
+          <xsd:element name="fmNstPf" nillable="true" type="xsd:boolean" />
+          <xsd:element name="fmNstPs" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfReturnpip2param">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ReturnPip2Param" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ReturnPip2Country">
+        <xsd:all>
+          <xsd:element name="countryName" nillable="true" type="xsd:string" />
+          <xsd:element name="countryNameEn" nillable="true" type="xsd:string" />
+          <xsd:element name="countryCode" nillable="true" type="xsd:string" />
+          <xsd:element name="products" nillable="true" type="tns:ArrayOfReturnpip2param" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfReturnpip2country">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ReturnPip2Country" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetPip2Response">
+        <xsd:all>
+          <xsd:element name="params" nillable="true" type="tns:ArrayOfReturnpip2country" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getInternationalParams2Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getInternationalParams2Result" type="tns:GetPip2Response" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="PieceShipmentItem">
+        <xsd:all>
+          <xsd:element name="shipmentNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="cedexNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="packageNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPieceshipmentitem">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:PieceShipmentItem" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetPieceIdRequest">
+        <xsd:all>
+          <xsd:element name="items" nillable="true" type="tns:ArrayOfPieceshipmentitem" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getPieceId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" type="tns:AuthData" />
+            <xsd:element name="request" type="tns:GetPieceIdRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Piece">
+        <xsd:all>
+          <xsd:element name="packageNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="productType" nillable="true" type="xsd:string" />
+          <xsd:element name="weightReal" nillable="true" type="xsd:float" />
+          <xsd:element name="weighVolumetric" nillable="true" type="xsd:float" />
+          <xsd:element name="width" nillable="true" type="xsd:int" />
+          <xsd:element name="length" nillable="true" type="xsd:int" />
+          <xsd:element name="height" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPiece">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:Piece" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PieceShipment">
+        <xsd:all>
+          <xsd:element name="shipmentNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="cedexNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="packages" nillable="true" type="tns:ArrayOfPiece" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPieceshipment">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:PieceShipment" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetPieceIdResponse">
+        <xsd:all>
+          <xsd:element name="shipments" nillable="true" type="tns:ArrayOfPieceshipment" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getPieceIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getPieceIdResult" type="tns:GetPieceIdResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ItemToLabelData">
+        <xsd:all>
+          <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfItemtolabeldata">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ItemToLabelData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getLabelsData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="itemsToLabelData" nillable="true" type="tns:ArrayOfItemtolabeldata" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ShipmentTimeLabelData">
+        <xsd:all>
+          <xsd:element name="labelExpDate" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentDate" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentStartHour" nillable="true" type="xsd:string" />
+          <xsd:element name="shipmentEndHour" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Routing">
+        <xsd:all>
+          <xsd:element name="senderDepot" nillable="true" type="xsd:string" />
+          <xsd:element name="receiverDepot" nillable="true" type="xsd:string" />
+          <xsd:element name="senderAps" nillable="true" type="xsd:string" />
+          <xsd:element name="receiverAps" nillable="true" type="xsd:string" />
+          <xsd:element name="tourId" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ShipperAddressLabelData">
+        <xsd:all>
+          <xsd:element name="contactPerson" nillable="true" type="xsd:string" />
+          <xsd:element name="contactPhone" nillable="true" type="xsd:string" />
+          <xsd:element name="contactEmail" nillable="true" type="xsd:string" />
+          <xsd:element name="preavisoPhone" nillable="true" type="xsd:string" />
+          <xsd:element name="preavisoEmail" nillable="true" type="xsd:string" />
+          <xsd:element name="preavisoPerson" nillable="true" type="xsd:string" />
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postalCode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReceiverAddressLabelData">
+        <xsd:all>
+          <xsd:element name="contactPerson" nillable="true" type="xsd:string" />
+          <xsd:element name="contactPhone" nillable="true" type="xsd:string" />
+          <xsd:element name="contactEmail" nillable="true" type="xsd:string" />
+          <xsd:element name="preavisoPhone" nillable="true" type="xsd:string" />
+          <xsd:element name="preavisoEmail" nillable="true" type="xsd:string" />
+          <xsd:element name="preavisoPerson" nillable="true" type="xsd:string" />
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="isPackstation" nillable="true" type="xsd:boolean" />
+          <xsd:element name="isPostfiliale" nillable="true" type="xsd:boolean" />
+          <xsd:element name="postnummer" nillable="true" type="xsd:string" />
+          <xsd:element name="addressType" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="postalCode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ServicePoint">
+        <xsd:all>
+          <xsd:element name="servicePointAccountNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="name" nillable="true" type="xsd:string" />
+          <xsd:element name="country" nillable="true" type="xsd:string" />
+          <xsd:element name="postcode" nillable="true" type="xsd:string" />
+          <xsd:element name="city" nillable="true" type="xsd:string" />
+          <xsd:element name="street" nillable="true" type="xsd:string" />
+          <xsd:element name="houseNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="apartmentNumber" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LabelDataServiceDefinition">
+        <xsd:all>
+          <xsd:element name="product" nillable="true" type="xsd:string" />
+          <xsd:element name="deliveryEvening" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliveryOnSaturday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="pickupOnSaturday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="collectOnDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="collectOnDeliveryValue" nillable="true" type="xsd:float" />
+          <xsd:element name="collectOnDeliveryForm" nillable="true" type="xsd:string" />
+          <xsd:element name="collectOnDeliveryReference" nillable="true" type="xsd:string" />
+          <xsd:element name="insurance" nillable="true" type="xsd:boolean" />
+          <xsd:element name="insuranceValue" nillable="true" type="xsd:float" />
+          <xsd:element name="returnOnDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="returnOnDeliveryReference" nillable="true" type="xsd:string" />
+          <xsd:element name="proofOfDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="selfCollect" nillable="true" type="xsd:boolean" />
+          <xsd:element name="predeliveryInformation" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliveryToNeighbour" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PieceDefinitionLabelData">
+        <xsd:all>
+          <xsd:element name="routingBarcode" nillable="true" type="xsd:string" />
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+          <xsd:element name="width" nillable="true" type="xsd:int" />
+          <xsd:element name="height" nillable="true" type="xsd:int" />
+          <xsd:element name="length" nillable="true" type="xsd:int" />
+          <xsd:element name="weight" nillable="true" type="xsd:float" />
+          <xsd:element name="quantity" nillable="true" type="xsd:int" />
+          <xsd:element name="nonStandard" nillable="true" type="xsd:boolean" />
+          <xsd:element name="blpPieceId" nillable="true" type="xsd:string" />
+          <xsd:element name="euroReturn" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPiecedefinitionlabeldata">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:PieceDefinitionLabelData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ItemToLabelDataResponse">
+        <xsd:all>
+          <xsd:element name="shipmentId" nillable="true" type="xsd:string" />
+          <xsd:element name="primaryWaybillNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="dispatchNotificationNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="labelHeader" nillable="true" type="xsd:string" />
+          <xsd:element name="content" nillable="true" type="xsd:string" />
+          <xsd:element name="comment" nillable="true" type="xsd:string" />
+          <xsd:element name="reference" nillable="true" type="xsd:string" />
+          <xsd:element name="billing" nillable="true" type="tns:Billing" />
+          <xsd:element name="shipmentTime" nillable="true" type="tns:ShipmentTimeLabelData" />
+          <xsd:element name="routing" nillable="true" type="tns:Routing" />
+          <xsd:element name="shipper" nillable="true" type="tns:ShipperAddressLabelData" />
+          <xsd:element name="receiver" nillable="true" type="tns:ReceiverAddressLabelData" />
+          <xsd:element name="neighbour" nillable="true" type="tns:NeighbourAddress" />
+          <xsd:element name="servicepoint" nillable="true" type="tns:ServicePoint" />
+          <xsd:element name="service" nillable="true" type="tns:LabelDataServiceDefinition" />
+          <xsd:element name="pieceList" nillable="true" type="tns:ArrayOfPiecedefinitionlabeldata" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfItemtolabeldataresponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ItemToLabelDataResponse" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getLabelsDataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getLabelsDataResult" type="tns:ArrayOfItemtolabeldataresponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="PricePayment">
+        <xsd:all>
+          <xsd:element name="accountNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="payerType" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PriceService">
+        <xsd:all>
+          <xsd:element name="product" nillable="true" type="xsd:string" />
+          <xsd:element name="deliveryEvening" nillable="true" type="xsd:boolean" />
+          <xsd:element name="deliveryOnSaturday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="pickupOnSaturday" nillable="true" type="xsd:boolean" />
+          <xsd:element name="collectOnDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="collectOnDeliveryValue" nillable="true" type="xsd:float" />
+          <xsd:element name="insurance" nillable="true" type="xsd:boolean" />
+          <xsd:element name="insuranceValue" nillable="true" type="xsd:float" />
+          <xsd:element name="returnOnDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="proofOfDelivery" nillable="true" type="xsd:boolean" />
+          <xsd:element name="selfCollect" nillable="true" type="xsd:boolean" />
+          <xsd:element name="predeliveryInformation" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PricePiece">
+        <xsd:all>
+          <xsd:element name="type" nillable="true" type="xsd:string" />
+          <xsd:element name="width" nillable="true" type="xsd:int" />
+          <xsd:element name="height" nillable="true" type="xsd:int" />
+          <xsd:element name="length" nillable="true" type="xsd:int" />
+          <xsd:element name="weight" nillable="true" type="xsd:float" />
+          <xsd:element name="quantity" nillable="true" type="xsd:int" />
+          <xsd:element name="nonStandard" nillable="true" type="xsd:boolean" />
+          <xsd:element name="euroReturn" nillable="true" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPricepiece">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:PricePiece" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PriceCustomsItem">
+        <xsd:all>
+          <xsd:element name="tariffCode" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfPricecustomsitem">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:PriceCustomsItem" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PriceCustoms">
+        <xsd:all>
+          <xsd:element name="customsType" nillable="true" type="xsd:string" />
+          <xsd:element name="customsItem" nillable="true" type="tns:ArrayOfPricecustomsitem" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="GetPriceRequest">
+        <xsd:all>
+          <xsd:element name="payment" nillable="true" type="tns:PricePayment" />
+          <xsd:element name="shipper" nillable="true" type="tns:ShipperAddress" />
+          <xsd:element name="receiver" nillable="true" type="tns:ReceiverAddress" />
+          <xsd:element name="service" nillable="true" type="tns:PriceService" />
+          <xsd:element name="pieceList" nillable="true" type="tns:ArrayOfPricepiece" />
+          <xsd:element name="customs" nillable="true" type="tns:PriceCustoms" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getPrice">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+            <xsd:element name="shipment" nillable="true" type="tns:GetPriceRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="GetPriceResponse">
+        <xsd:all>
+          <xsd:element name="price" nillable="true" type="xsd:float" />
+          <xsd:element name="fuelSurcharge" nillable="true" type="xsd:float" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getPriceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getPriceResult" type="tns:GetPriceResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="GetRoutingRequest">
+        <xsd:all>
+          <xsd:element name="authData" nillable="true" type="tns:AuthData" />
+          <xsd:element name="serviceType" nillable="true" type="xsd:string" />
+          <xsd:element name="shipper" nillable="true" type="tns:ShipperAddress" />
+          <xsd:element name="receiver" nillable="true" type="tns:ShipperAddress" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getRouting">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getRoutingRequest" nillable="true" type="tns:GetRoutingRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="GetRoutingResponse">
+        <xsd:all>
+          <xsd:element name="shipperEXDepot" nillable="true" type="xsd:string" />
+          <xsd:element name="shipperDRDepot" nillable="true" type="xsd:string" />
+          <xsd:element name="receiverEXDepot" nillable="true" type="xsd:string" />
+          <xsd:element name="receiverDRDepot" nillable="true" type="xsd:string" />
+          <xsd:element name="weekEXRoad" nillable="true" type="xsd:string" />
+          <xsd:element name="weekDRRoad" nillable="true" type="xsd:string" />
+          <xsd:element name="saturdayEXRoad" nillable="true" type="xsd:string" />
+          <xsd:element name="saturdayDRRoad" nillable="true" type="xsd:string" />
+          <xsd:element name="EX_PN" nillable="true" type="xsd:string" />
+          <xsd:element name="EX_WT" nillable="true" type="xsd:string" />
+          <xsd:element name="EX_SR" nillable="true" type="xsd:string" />
+          <xsd:element name="EX_CZ" nillable="true" type="xsd:string" />
+          <xsd:element name="EX_PT" nillable="true" type="xsd:string" />
+          <xsd:element name="EX_SO" nillable="true" type="xsd:string" />
+          <xsd:element name="DR_PN" nillable="true" type="xsd:string" />
+          <xsd:element name="DR_WT" nillable="true" type="xsd:string" />
+          <xsd:element name="DR_SR" nillable="true" type="xsd:string" />
+          <xsd:element name="DR_CZ" nillable="true" type="xsd:string" />
+          <xsd:element name="DR_PT" nillable="true" type="xsd:string" />
+          <xsd:element name="DR_SO" nillable="true" type="xsd:string" />
+          <xsd:element name="W_PN" nillable="true" type="xsd:string" />
+          <xsd:element name="W_WT" nillable="true" type="xsd:string" />
+          <xsd:element name="W_SR" nillable="true" type="xsd:string" />
+          <xsd:element name="W_CZ" nillable="true" type="xsd:string" />
+          <xsd:element name="W_PT" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:element name="getRoutingResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getRoutingResult" type="tns:GetRoutingResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getVersionIn">
+    <wsdl:part name="parameters" element="tns:getVersion" />
+  </wsdl:message>
+  <wsdl:message name="getVersionOut">
+    <wsdl:part name="parameters" element="tns:getVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="createShipmentsIn">
+    <wsdl:part name="parameters" element="tns:createShipments" />
+  </wsdl:message>
+  <wsdl:message name="createShipmentsOut">
+    <wsdl:part name="parameters" element="tns:createShipmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getReturnByWaybillIn">
+    <wsdl:part name="parameters" element="tns:getReturnByWaybill" />
+  </wsdl:message>
+  <wsdl:message name="getReturnByWaybillOut">
+    <wsdl:part name="parameters" element="tns:getReturnByWaybillResponse" />
+  </wsdl:message>
+  <wsdl:message name="createShipmentReturnIn">
+    <wsdl:part name="parameters" element="tns:createShipmentReturn" />
+  </wsdl:message>
+  <wsdl:message name="createShipmentReturnOut">
+    <wsdl:part name="parameters" element="tns:createShipmentReturnResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteShipmentsIn">
+    <wsdl:part name="parameters" element="tns:deleteShipments" />
+  </wsdl:message>
+  <wsdl:message name="deleteShipmentsOut">
+    <wsdl:part name="parameters" element="tns:deleteShipmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMyShipmentsIn">
+    <wsdl:part name="parameters" element="tns:getMyShipments" />
+  </wsdl:message>
+  <wsdl:message name="getMyShipmentsOut">
+    <wsdl:part name="parameters" element="tns:getMyShipmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMyShipmentsCountIn">
+    <wsdl:part name="parameters" element="tns:getMyShipmentsCount" />
+  </wsdl:message>
+  <wsdl:message name="getMyShipmentsCountOut">
+    <wsdl:part name="parameters" element="tns:getMyShipmentsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPostalCodeServicesIn">
+    <wsdl:part name="parameters" element="tns:getPostalCodeServices" />
+  </wsdl:message>
+  <wsdl:message name="getPostalCodeServicesOut">
+    <wsdl:part name="parameters" element="tns:getPostalCodeServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTrackAndTraceInfoIn">
+    <wsdl:part name="parameters" element="tns:getTrackAndTraceInfo" />
+  </wsdl:message>
+  <wsdl:message name="getTrackAndTraceInfoOut">
+    <wsdl:part name="parameters" element="tns:getTrackAndTraceInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="bookCourierIn">
+    <wsdl:part name="parameters" element="tns:bookCourier" />
+  </wsdl:message>
+  <wsdl:message name="bookCourierOut">
+    <wsdl:part name="parameters" element="tns:bookCourierResponse" />
+  </wsdl:message>
+  <wsdl:message name="cancelCourierBookingIn">
+    <wsdl:part name="parameters" element="tns:cancelCourierBooking" />
+  </wsdl:message>
+  <wsdl:message name="cancelCourierBookingOut">
+    <wsdl:part name="parameters" element="tns:cancelCourierBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLabelsIn">
+    <wsdl:part name="parameters" element="tns:getLabels" />
+  </wsdl:message>
+  <wsdl:message name="getLabelsOut">
+    <wsdl:part name="parameters" element="tns:getLabelsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPnpIn">
+    <wsdl:part name="parameters" element="tns:getPnp" />
+  </wsdl:message>
+  <wsdl:message name="getPnpOut">
+    <wsdl:part name="parameters" element="tns:getPnpResponse" />
+  </wsdl:message>
+  <wsdl:message name="getShipmentScanIn">
+    <wsdl:part name="parameters" element="tns:getShipmentScan" />
+  </wsdl:message>
+  <wsdl:message name="getShipmentScanOut">
+    <wsdl:part name="parameters" element="tns:getShipmentScanResponse" />
+  </wsdl:message>
+  <wsdl:message name="createShipmentIn">
+    <wsdl:part name="parameters" element="tns:createShipment" />
+  </wsdl:message>
+  <wsdl:message name="createShipmentOut">
+    <wsdl:part name="parameters" element="tns:createShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteShipmentIn">
+    <wsdl:part name="parameters" element="tns:deleteShipment" />
+  </wsdl:message>
+  <wsdl:message name="deleteShipmentOut">
+    <wsdl:part name="parameters" element="tns:deleteShipmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNearestServicepointsIn">
+    <wsdl:part name="parameters" element="tns:getNearestServicepoints" />
+  </wsdl:message>
+  <wsdl:message name="getNearestServicepointsOut">
+    <wsdl:part name="parameters" element="tns:getNearestServicepointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getInternationalParamsIn">
+    <wsdl:part name="parameters" element="tns:getInternationalParams" />
+  </wsdl:message>
+  <wsdl:message name="getInternationalParamsOut">
+    <wsdl:part name="parameters" element="tns:getInternationalParamsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getReturnParamsIn">
+    <wsdl:part name="parameters" element="tns:getReturnParams" />
+  </wsdl:message>
+  <wsdl:message name="getReturnParamsOut">
+    <wsdl:part name="parameters" element="tns:getReturnParamsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getInternationalParams2In">
+    <wsdl:part name="parameters" element="tns:getInternationalParams2" />
+  </wsdl:message>
+  <wsdl:message name="getInternationalParams2Out">
+    <wsdl:part name="parameters" element="tns:getInternationalParams2Response" />
+  </wsdl:message>
+  <wsdl:message name="getPieceIdIn">
+    <wsdl:part name="parameters" element="tns:getPieceId" />
+  </wsdl:message>
+  <wsdl:message name="getPieceIdOut">
+    <wsdl:part name="parameters" element="tns:getPieceIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLabelsDataIn">
+    <wsdl:part name="parameters" element="tns:getLabelsData" />
+  </wsdl:message>
+  <wsdl:message name="getLabelsDataOut">
+    <wsdl:part name="parameters" element="tns:getLabelsDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPriceIn">
+    <wsdl:part name="parameters" element="tns:getPrice" />
+  </wsdl:message>
+  <wsdl:message name="getPriceOut">
+    <wsdl:part name="parameters" element="tns:getPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRoutingIn">
+    <wsdl:part name="parameters" element="tns:getRouting" />
+  </wsdl:message>
+  <wsdl:message name="getRoutingOut">
+    <wsdl:part name="parameters" element="tns:getRoutingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DHL24WebapiPort">
+    <wsdl:operation name="getVersion">
+      <documentation>Sprawdzenie wersji webapi.</documentation>
+      <wsdl:input message="tns:getVersionIn" />
+      <wsdl:output message="tns:getVersionOut" />
+    </wsdl:operation>
+    <wsdl:operation name="createShipments">
+      <documentation>Definiowanie przesyłek w systemie DHL</documentation>
+      <wsdl:input message="tns:createShipmentsIn" />
+      <wsdl:output message="tns:createShipmentsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getReturnByWaybill">
+      <documentation>Zwrot danych</documentation>
+      <wsdl:input message="tns:getReturnByWaybillIn" />
+      <wsdl:output message="tns:getReturnByWaybillOut" />
+    </wsdl:operation>
+    <wsdl:operation name="createShipmentReturn">
+      <documentation>Stwórz przesyłkę zwrotną</documentation>
+      <wsdl:input message="tns:createShipmentReturnIn" />
+      <wsdl:output message="tns:createShipmentReturnOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteShipments">
+      <documentation>Usuwanie przesyłek w systemie DHL</documentation>
+      <wsdl:input message="tns:deleteShipmentsIn" />
+      <wsdl:output message="tns:deleteShipmentsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getMyShipments">
+      <documentation>Pobieranie podstawowych danych o przesyłkach
+Maksymalny zakres dat to 90 dni. Zwracane jest maksimum 100 przesyłek, jeśli jest ich więcej należy korzystać z offsetu.</documentation>
+      <wsdl:input message="tns:getMyShipmentsIn" />
+      <wsdl:output message="tns:getMyShipmentsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getMyShipmentsCount">
+      <documentation>Pobieranie podstawowych danych o ilości przesyłek
+Maksymalny zakres dat to 90 dni.</documentation>
+      <wsdl:input message="tns:getMyShipmentsCountIn" />
+      <wsdl:output message="tns:getMyShipmentsCountOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPostalCodeServices">
+      <documentation>Weryfikacja poprawności kodu pocztowego oraz pobranie dostępnych
+w danej chwili usług przewozowych.
+Odpowiedź metody jest funkcją godziny, w jakiej przychodzi żądanie (usługi terminowe
+są dostępne do ustalonych godzin).</documentation>
+      <wsdl:input message="tns:getPostalCodeServicesIn" />
+      <wsdl:output message="tns:getPostalCodeServicesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTrackAndTraceInfo">
+      <documentation>Pobranie danych na temat zdarzeń związanych z przesyłką o przekazanym identyfikatorze.</documentation>
+      <wsdl:input message="tns:getTrackAndTraceInfoIn" />
+      <wsdl:output message="tns:getTrackAndTraceInfoOut" />
+    </wsdl:operation>
+    <wsdl:operation name="bookCourier">
+      <documentation>Zamawianie kuriera</documentation>
+      <wsdl:input message="tns:bookCourierIn" />
+      <wsdl:output message="tns:bookCourierOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelCourierBooking">
+      <documentation>Anulowanie zamówionego kuriera</documentation>
+      <wsdl:input message="tns:cancelCourierBookingIn" />
+      <wsdl:output message="tns:cancelCourierBookingOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLabels">
+      <documentation>Pobranie różnego rodzaju etykiet związanych z przesyłkami.
+Za jednym wywołaniem można pobrać maksymalnie 3 etykiety</documentation>
+      <wsdl:input message="tns:getLabelsIn" />
+      <wsdl:output message="tns:getLabelsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPnp">
+      <documentation>Pobranie raportu Potwierdzenie Nadanych Przesyłek (PNP)</documentation>
+      <wsdl:input message="tns:getPnpIn" />
+      <wsdl:output message="tns:getPnpOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getShipmentScan">
+      <documentation>Pobieranie skanów LP w systemie DHL</documentation>
+      <wsdl:input message="tns:getShipmentScanIn" />
+      <wsdl:output message="tns:getShipmentScanOut" />
+    </wsdl:operation>
+    <wsdl:operation name="createShipment">
+      <documentation>Definiowanie przesyłki w systemie DHL - metoda agregująca</documentation>
+      <wsdl:input message="tns:createShipmentIn" />
+      <wsdl:output message="tns:createShipmentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteShipment">
+      <documentation>Usuwanie przesyłki w systemie DHL - metoda agregująca</documentation>
+      <wsdl:input message="tns:deleteShipmentIn" />
+      <wsdl:output message="tns:deleteShipmentOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getNearestServicepoints">
+      <documentation>Pobieranie najbliższych punktów serwisowych typu Last Mile bez COD</documentation>
+      <wsdl:input message="tns:getNearestServicepointsIn" />
+      <wsdl:output message="tns:getNearestServicepointsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getInternationalParams">
+      <documentation>Pobieranie informacji o możliwościach przesyłek międzynarodowych</documentation>
+      <wsdl:input message="tns:getInternationalParamsIn" />
+      <wsdl:output message="tns:getInternationalParamsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getReturnParams">
+      <documentation>Pobieranie informacji o możliwościach przesyłek międzynarodowych</documentation>
+      <wsdl:input message="tns:getReturnParamsIn" />
+      <wsdl:output message="tns:getReturnParamsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getInternationalParams2">
+      <documentation>Fetching data of all products available in each country</documentation>
+      <wsdl:input message="tns:getInternationalParams2In" />
+      <wsdl:output message="tns:getInternationalParams2Out" />
+    </wsdl:operation>
+    <wsdl:operation name="getPieceId">
+      <documentation>Fetching data of all products available in each country</documentation>
+      <wsdl:input message="tns:getPieceIdIn" />
+      <wsdl:output message="tns:getPieceIdOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLabelsData">
+      <documentation>Pobieranie informacji o przesyłkach</documentation>
+      <wsdl:input message="tns:getLabelsDataIn" />
+      <wsdl:output message="tns:getLabelsDataOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPrice">
+      <documentation>Wyliczanie ceny dla przesyłki</documentation>
+      <wsdl:input message="tns:getPriceIn" />
+      <wsdl:output message="tns:getPriceOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRouting">
+      <documentation>@param GetRoutingRequest $getRoutingRequest</documentation>
+      <wsdl:input message="tns:getRoutingIn" />
+      <wsdl:output message="tns:getRoutingOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DHL24WebapiBinding" type="tns:DHL24WebapiPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getVersion">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getVersion" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createShipments">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#createShipments" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReturnByWaybill">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getReturnByWaybill" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createShipmentReturn">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#createShipmentReturn" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteShipments">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#deleteShipments" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMyShipments">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getMyShipments" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMyShipmentsCount">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getMyShipmentsCount" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPostalCodeServices">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getPostalCodeServices" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTrackAndTraceInfo">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getTrackAndTraceInfo" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bookCourier">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#bookCourier" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelCourierBooking">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#cancelCourierBooking" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLabels">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getLabels" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPnp">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getPnp" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getShipmentScan">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getShipmentScan" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createShipment">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#createShipment" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteShipment">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#deleteShipment" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNearestServicepoints">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getNearestServicepoints" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInternationalParams">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getInternationalParams" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReturnParams">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getReturnParams" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInternationalParams2">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getInternationalParams2" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPieceId">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getPieceId" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLabelsData">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getLabelsData" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPrice">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getPrice" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRouting">
+      <soap:operation soapAction="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1#getRouting" />
+      <wsdl:input>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DHL24WebapiService">
+    <wsdl:port name="DHL24WebapiPort" binding="tns:DHL24WebapiBinding">
+      <soap:address location="https://sandbox.dhl24.com.pl/webapi2/provider/service.html?ws=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
