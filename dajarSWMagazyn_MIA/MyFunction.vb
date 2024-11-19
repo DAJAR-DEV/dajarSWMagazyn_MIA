@@ -1,13 +1,10 @@
-﻿Imports Oracle.ManagedDataAccess.Client
-Imports System.Data
-Imports System.Web.UI.Page
-Imports System.IO
-Imports dajarSWMagazyn_MIA.HashMd5
+﻿Imports System.Drawing.Imaging
 Imports System.Globalization
+Imports System.IO
 Imports iTextSharp.text
 Imports iTextSharp.text.pdf
-Imports System.Drawing
-Imports System.Drawing.Imaging
+Imports Oracle.ManagedDataAccess.Client
+Imports Image = System.Drawing.Image
 
 Public Class MyFunction
     Shared sqlExp As String = ""
@@ -21,15 +18,30 @@ Public Class MyFunction
     Public Shared networkMainPath As String = "\\serwermagazyny.dajar.lokalne\IIS\dajarSWMagazyn_MIA\"
     ''Public Shared networkSerwerMainDirectory As String = "C:\inetpub\wwwroot\dajarSWMagazyn_MIA\"
 
-    Public Shared connString As String = "Data Source=(DESCRIPTION=" _
-                                         + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.1.0.30)(PORT=1521)))" _
-                                         + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCL)));" _
-                                         + "User Id=DAJAR;Password=DAJAR;"
-
-    Public Shared connStringTEST As String = "Data Source=(DESCRIPTION=" _
+    ' ***********************************
+    ' ** TO CHANGE ACTIVE CONNECTION   **
+    ' ** SET IsTest TO TRUE OR FALSE   **
+    ' ** True - TEST CONNECTION        **
+    ' ** False - PRODUCTION CONNECTION **
+    ' ***********************************
+    
+    ' PRODUCTION CONNECTION STRING
+    Public Shared ProductionConnection As String = "Data Source=(DESCRIPTION=" _
+                                                   + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.1.0.30)(PORT=1521)))" _
+                                                   + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCL)));" _
+                                                   + "User Id=DAJAR;Password=DAJAR;"
+    
+    ' TEST CONNECTION STRING
+    Public Shared TestConnection As String = "Data Source=(DESCRIPTION=" _
                                              + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.1.0.148)(PORT=1521)))" _
                                              + "(CONNECT_DATA=(SERVER=DEDICATED)(SID=orcl)));" _
                                              + "User Id=DAJAR;Password=DAJAR;"
+    
+    ' SET CONNECTION STRING
+    ' TEST - True
+    ' PRODUCTION - False                                         
+    Private const IsTest As Boolean = True
+    Public Shared ConnString As String = If(IsTest, TestConnection, ProductionConnection)
 
     Public Shared userEmail As String = "admin.dswm@dajar.pl"
     Public Shared passwordEmail As String = "admin2014@@##"
@@ -151,7 +163,7 @@ Public Class MyFunction
                 bufor = oracle_dr.Item(0).ToString
             End While
 
-        Catch ex As System.ArgumentOutOfRangeException
+        Catch ex As ArgumentOutOfRangeException
             Console.WriteLine(ex)
         End Try
 
@@ -165,9 +177,9 @@ Public Class MyFunction
 
     Shared Function SetBuforAktualizacja(ByVal nr_zamow As String, ByVal schemat As String, ByVal skrot As String) _
         As Boolean
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
+        Dim timestamp As String = DataEvalLogTime()
         Dim sqlexp As String = ""
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             sqlexp = "update dp_swm_mia_buf set dyspozycja = 'Y' where nr_zamow='" & nr_zamow & "' and schemat='" & schemat &
                      "' and skrot='" & skrot & "'"
@@ -179,9 +191,9 @@ Public Class MyFunction
     Shared Function SetMagazynDyspozycja(ByVal login As String, ByVal hash As String, ByVal nr_zamow As String,
                                          ByVal status As String, ByVal schemat As String, ByVal mag As String,
                                          ByVal skrot As String, ByVal ilosc As Integer) As Boolean
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
+        Dim timestamp As String = DataEvalLogTime()
         Dim sqlexp As String = ""
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             sqlexp = "insert into dp_swm_mia_mag (login,hash,nr_zamow,autodata,status,schemat,mag,skrot,ile_poz) values('" &
                      login & "','" & hash & "','" & nr_zamow & "',TO_TIMESTAMP('" & timestamp &
@@ -193,7 +205,7 @@ Public Class MyFunction
         End Using
     End Function
 
-    Shared Sub ClearSessionInformation(ByRef sesja_bierzaca As System.Web.SessionState.HttpSessionState)
+    Shared Sub ClearSessionInformation(ByRef sesja_bierzaca As HttpSessionState)
         sesja_bierzaca.Remove("mylogin")
         sesja_bierzaca.Remove("myhash")
         sesja_bierzaca.Remove("contentHash")
@@ -205,8 +217,8 @@ Public Class MyFunction
     End Sub
 
     Shared Sub RefreshDDLOperator(ByRef ddlObiekt As DropDownList,
-                                  ByRef sesja_bierzaca As System.Web.SessionState.HttpSessionState)
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+                                  ByRef sesja_bierzaca As HttpSessionState)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim sqlExp As String =
                     "select login from dp_swm_mia_uzyt where status = 'X' and typ_oper in('M','O','P','W','MO','MP','PM','PP','RM','ME') and blokada_konta is null order by login"
@@ -224,7 +236,7 @@ Public Class MyFunction
             dr.Close()
             cmd.Dispose()
 
-            ddlObiekt.Items.Add(New System.Web.UI.WebControls.ListItem("WYBIERZ OPERATORA", "WYBIERZ OPERATORA", True))
+            ddlObiekt.Items.Add(New WebControls.ListItem("WYBIERZ OPERATORA", "WYBIERZ OPERATORA", True))
 
             If sesja_bierzaca("mylogin") IsNot Nothing Then
                 ddlObiekt.SelectedValue = sesja_bierzaca("mylogin")
@@ -251,7 +263,7 @@ Public Class MyFunction
                 bufor += dr.Item(0).ToString & vbNewLine
             End While
 
-        Catch ex As System.ArgumentOutOfRangeException
+        Catch ex As ArgumentOutOfRangeException
             Console.WriteLine(ex)
         End Try
 
@@ -264,10 +276,10 @@ Public Class MyFunction
     End Function
 
     Shared Function GeneratePrintId() As String
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim sqlExp As String = "SELECT TO_NUMBER(NVL(MAX(recno)+1,1)) recno from dp_swm_mia_print"
-            Dim generateId As String = dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(sqlExp, conn)
+            Dim generateId As String = GetStringFromSqlExp(sqlExp, conn)
             conn.Close()
             Return generateId
         End Using
@@ -284,9 +296,9 @@ Public Class MyFunction
         ''SHIPMENT_ID Not NULL VARCHAR2(50)  
         ''status               Char(1) 
 
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
+        Dim timestamp As String = DataEvalLogTime()
         Dim sqlexp As String = ""
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim recno As String = GeneratePrintId()
             sqlexp =
@@ -302,9 +314,9 @@ Public Class MyFunction
     Shared Function UpdatePrintDyspozycja(ByVal recno As String, ByVal shipment_id As String, ByVal session_id As String,
                                           ByVal status As String) As Boolean
 
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
+        Dim timestamp As String = DataEvalLogTime()
         Dim sqlexp As String = ""
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             sqlexp = "update dp_swm_mia_print set status='" & status & "' where recno='" & recno & "' and session_id='" &
                      session_id & "'"
@@ -315,27 +327,27 @@ Public Class MyFunction
 
 
     Shared Function GetRemoteIp() As String
-        Dim buf As String = System.Web.HttpContext.Current.Request.ServerVariables("REMOTE_ADDR")
+        Dim buf As String = HttpContext.Current.Request.ServerVariables("REMOTE_ADDR")
         Return buf
     End Function
 
     Shared Function GeneratePaczkaId() As String
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim sqlExp As String =
                     "SELECT 'PA'||LPAD(TO_NUMBER(NVL(SUBSTR(MAX(paczka_id),3,7)+1,1)),7,0)||'/'||TO_CHAR(sysdate,'YY') paczka_id from dp_swm_mia_paczka_info where paczka_id like 'PA%'||TO_CHAR(sysdate,'YY')"
-            Dim generateId As String = dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(sqlExp, conn)
+            Dim generateId As String = GetStringFromSqlExp(sqlExp, conn)
             conn.Close()
             Return generateId
         End Using
     End Function
 
     Shared Function GenerateShipmentId() As String
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim sqlExp As String =
                     "SELECT 'SH'||LPAD(TO_NUMBER(NVL(SUBSTR(MAX(shipment_id),3,7)+1,1)),7,0)||'/'||TO_CHAR(sysdate,'YY') paczka_id from dp_swm_mia_paczka_info where shipment_id like 'SH%'||TO_CHAR(sysdate,'YY')"
-            Dim generateId As String = dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(sqlExp, conn)
+            Dim generateId As String = GetStringFromSqlExp(sqlExp, conn)
             conn.Close()
             Return generateId
         End Using
@@ -343,10 +355,10 @@ Public Class MyFunction
 
     Shared Function UpdateDyspozycjaHT_ZOG(ByVal nr_zamow As String, ByVal schemat As String, ByVal status As String) _
         As Boolean
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
+        Dim timestamp As String = DataEvalLogTime()
         Dim sqlexp As String = ""
 
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim data_user As String = DateTime.Now.Year & "/" & DateTime.Now.Month.ToString("D2") & "/" &
                                       DateTime.Now.Day.ToString("D2")
@@ -376,7 +388,7 @@ Public Class MyFunction
         Dim sqlexp As String = ""
         Dim return_value As String = ""
 
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             If schemat = "DAJAR" Or schemat = "DOMINUS" Then
                 sqlexp = "SELECT RECNO FROM HT_ZOD WHERE IE$0 LIKE '" & nr_zamow & "%'"
@@ -388,19 +400,19 @@ Public Class MyFunction
                     While oracle_dr.Read()
                         recno = oracle_dr.Item(0).ToString
                         is_deleted =
-                            dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(
+                            GetStringFromSqlExp(
                                 "SELECT IS_DELETED FROM HT_ZOD WHERE RECNO=" & recno, conn)
                         ilosc =
-                            dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(
+                            GetStringFromSqlExp(
                                 "SELECT ILOSC FROM HT_ZOD WHERE RECNO=" & recno, conn)
                         zreal =
-                            dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(
+                            GetStringFromSqlExp(
                                 "SELECT ZREAL FROM HT_ZOD WHERE RECNO=" & recno, conn)
                         ilosc_potw =
-                            dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(
+                            GetStringFromSqlExp(
                                 "SELECT ILOSC_POTW FROM HT_ZOD WHERE RECNO=" & recno, conn)
                         godzina_po =
-                            dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(
+                            GetStringFromSqlExp(
                                 "SELECT GODZINA_PO FROM HT_ZOD WHERE RECNO=" & recno, conn)
                         If is_deleted = "Y" Then
                             return_value = "Z"
@@ -417,7 +429,7 @@ Public Class MyFunction
                         sqlexp = "UPDATE HT_ZOD SET IE$2 = " & IE_2 & " WHERE RECNO=" & recno
                         Dim result As Boolean = ExecuteFromSqlExp(sqlexp, conn)
                     End While
-                Catch ex As System.ArgumentOutOfRangeException
+                Catch ex As ArgumentOutOfRangeException
                     Console.WriteLine(ex)
                 End Try
 
@@ -473,7 +485,7 @@ Public Class MyFunction
         Dim sqlexp As String = ""
         Dim return_value As String = ""
 
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             If schemat = "DAJAR" Or schemat = "DOMINUS" Then
                 sqlexp = "SELECT RECNO FROM HT_ZOD WHERE IE$0 LIKE '" & nr_zamow & "%'"
@@ -485,13 +497,13 @@ Public Class MyFunction
                     While oracle_dr.Read()
                         recno = oracle_dr.Item(0).ToString
                         ilosc =
-                            dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(
+                            GetStringFromSqlExp(
                                 "SELECT ILOSC FROM HT_ZOD WHERE RECNO=" & recno, conn)
                         zreal =
-                            dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(
+                            GetStringFromSqlExp(
                                 "SELECT ZREAL FROM HT_ZOD WHERE RECNO=" & recno, conn)
                         godzina_po =
-                            dajarSWMagazyn_MIA.MyFunction.GetStringFromSqlExp(
+                            GetStringFromSqlExp(
                                 "SELECT GODZINA_PO FROM HT_ZOD WHERE RECNO=" & recno, conn)
                         If (ilosc = zreal) Or (godzina_po = "ZREALIZ.") Then
                             return_value = "X"
@@ -504,7 +516,7 @@ Public Class MyFunction
                         sqlexp = "UPDATE HT_ZOD SET IE$4 = " & IE_4 & " WHERE RECNO=" & recno
                         Dim result As Boolean = ExecuteFromSqlExp(sqlexp, conn)
                     End While
-                Catch ex As System.ArgumentOutOfRangeException
+                Catch ex As ArgumentOutOfRangeException
                     Console.WriteLine(ex)
                 End Try
 
@@ -546,10 +558,10 @@ Public Class MyFunction
     End Function
 
     Shared Function AnulowanieDyspozycjaHT_ZOG(ByVal nr_zamow As String, ByVal schemat As String) As Boolean
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
+        Dim timestamp As String = DataEvalLogTime()
         Dim sqlexp As String = ""
 
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim data_user As String = DateTime.Now.Year & "/" & DateTime.Now.Month.ToString("D2") & "/" &
                                       DateTime.Now.Day.ToString("D2")
@@ -627,7 +639,7 @@ Public Class MyFunction
                                  indeks & ",10)"
                         result = ExecuteFromSqlExp(sqlexp, conn)
                     End While
-                Catch ex As System.ArgumentOutOfRangeException
+                Catch ex As ArgumentOutOfRangeException
                     Console.WriteLine(ex)
                 End Try
 
@@ -674,9 +686,9 @@ Public Class MyFunction
 
     Shared Function SetOperacjeStatus(ByVal login As String, ByVal hash As String, ByVal typ_oper As String, ByVal status As String) As Boolean
         Dim result As Boolean = False
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
+        Dim timestamp As String = DataEvalLogTime()
         Dim sqlexp As String = ""
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             sqlexp = "INSERT INTO dp_swm_mia_oper VALUES('" & login & "','" & hash & "','" & typ_oper & "',TO_TIMESTAMP('" &
                      timestamp & "', 'RR/MM/DD HH24:MI:SS'),'" & status & "')"
@@ -689,8 +701,8 @@ Public Class MyFunction
 
     Shared Function SetHistoriaTowary(ByVal skrot As String, ByVal adres As String, ByVal strefa As String, ByVal is_active As String, ByVal oper As String, ByVal login As String, ByVal hash As String) As Boolean
         Dim result As Boolean = False
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Dim timestamp As String = DataEvalLogTime()
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim sqlExp As String = "insert into dp_swm_mia_towary_hist values('" & skrot & "','" & adres & "','" & strefa &
                                    "','" & is_active & "','" & oper & "','" & login & "','" & hash & "',TO_TIMESTAMP('" &
@@ -703,12 +715,12 @@ Public Class MyFunction
 
     Shared Function SetSmsInformationStatus(ByVal login As String, ByVal hash As String, ByVal telefon As String,
                                             ByVal message As String) As Boolean
-        Dim timestamp As String = dajarSWMagazyn_MIA.MyFunction.DataEvalLogTime()
+        Dim timestamp As String = DataEvalLogTime()
         Dim sqlexp As String = ""
-        Using conn As New OracleConnection(dajarSWMagazyn_MIA.MyFunction.connString)
+        Using conn As New OracleConnection(ConnString)
             conn.Open()
             Dim hashInput As String = login & telefon & Date.Now.ToString
-            Dim id_sms As String = getMd5Hash(hashInput)
+            Dim id_sms As String = HashMd5.getMd5Hash(hashInput)
 
             sqlexp = "INSERT INTO dp_swm_mia_SMS_INFO (ID_SMS,LOGIN,HASH,MESSAGE,TELEFON,STATUS,DATA) VALUES('" & id_sms &
                      "','" & login & "','" & hash & "','" & message & "','" & telefon & "','W',TO_TIMESTAMP('" &
@@ -740,7 +752,7 @@ Public Class MyFunction
     End Function
 
     Shared Sub Session_Remove(ByVal variable As List(Of String),
-                              ByRef sesja_bierzaca As System.Web.SessionState.HttpSessionState)
+                              ByRef sesja_bierzaca As HttpSessionState)
         For Each sv In variable
             sesja_bierzaca.Remove(sv)
         Next
@@ -752,9 +764,9 @@ Public Class MyFunction
         Dim fileSciezkaDostepu As String = ""
 
         If myDevice = "ipad" Then _
-            : fileSciezkaDostepu = dajarSWMagazyn_MIA.MyFunction.networkPath & "/" & katalog & "/" & nazwaPliku
+            : fileSciezkaDostepu = networkPath & "/" & katalog & "/" & nazwaPliku
         ElseIf myDevice = "standard" Then _
-            : fileSciezkaDostepu = dajarSWMagazyn_MIA.MyFunction.networkDirectory & "/" & katalog & "/" & nazwaPliku
+            : fileSciezkaDostepu = networkDirectory & "/" & katalog & "/" & nazwaPliku
         End If
 
         If File.Exists(fileSciezkaDostepu) Then : Return nazwaPliku
@@ -766,15 +778,15 @@ Public Class MyFunction
                                            ByVal email_template As String, ByVal form_field As List(Of String),
                                            ByVal sqlexp As String, ByVal dokument As String, ByVal schemat As String,
                                            ByVal osoba_generujaca As String, ByVal conn As OracleConnection,
-                                           ByVal sesja_bierzaca As System.Web.SessionState.HttpSessionState)
+                                           ByVal sesja_bierzaca As HttpSessionState)
         Dim FileAttach As New List(Of String)
         Dim strMessage As String = ""
 
         '#######tresc wiadomosci start
         Dim _
             fileEmailContent As _
-                New StreamReader(dajarSWMagazyn_MIA.MyFunction.networkPathEmailAttahement & "/" & email_template,
-                                 System.Text.Encoding.GetEncoding(1250))
+                New StreamReader(networkPathEmailAttahement & "/" & email_template,
+                                 Encoding.GetEncoding(1250))
         Dim bufor As String = fileEmailContent.ReadToEnd
         fileEmailContent.Close()
 
@@ -792,7 +804,7 @@ Public Class MyFunction
                 Next
             End While
 
-        Catch ex As System.ArgumentOutOfRangeException
+        Catch ex As ArgumentOutOfRangeException
             Console.WriteLine(ex)
         End Try
 
@@ -862,16 +874,16 @@ Public Class MyFunction
         ''    If File.Exists(fileDirectory) Then FileAttach.Add(fileDirectory)
         ''Next
         '###################################################################DODAWANIE ZALACZNIKA DO WIADOMOSCI################################################################
-        dajarSWMagazyn_MIA.SendMail.SendEmailMessageMulti(dajarSWMagazyn_MIA.MyFunction.userEmail, email_adres, email_title,
-                                                      strMessage, FileAttach, dajarSWMagazyn_MIA.MyFunction.userEmail,
-                                                      dajarSWMagazyn_MIA.MyFunction.passwordEmail)
+        SendMail.SendEmailMessageMulti(userEmail, email_adres, email_title,
+                                                      strMessage, FileAttach, userEmail,
+                                                      passwordEmail)
     End Sub
 
     Shared Function CONVERT_STR_TO_BASE64(ByVal str As String) As String
         Dim base64Decoded As String = str
         Dim data As Byte()
-        data = System.Text.ASCIIEncoding.ASCII.GetBytes(base64Decoded)
-        Dim base64Encoded As String = System.Convert.ToBase64String(data)
+        data = ASCIIEncoding.ASCII.GetBytes(base64Decoded)
+        Dim base64Encoded As String = Convert.ToBase64String(data)
         Return base64Encoded
     End Function
 
@@ -885,7 +897,7 @@ Public Class MyFunction
 
     Shared Sub IMAGE_CONVERT_GIF_to_PDF(ByVal gif_source As String, ByVal pdf_source As String)
         Try
-            If System.IO.File.Exists(gif_source) Then
+            If File.Exists(gif_source) Then
                 ' Tworzenie dokumentu PDF
                 Dim document As New Document()
                 PdfWriter.GetInstance(document, New FileStream(pdf_source, FileMode.Create))
@@ -896,7 +908,7 @@ Public Class MyFunction
                 Dim bm As Integer = 250
                 Dim tm As Integer = 0
                 ' Załaduj obraz GIF
-                Dim gifImage As System.Drawing.Image = System.Drawing.Image.FromFile(gif_source)
+                Dim gifImage As Image = Image.FromFile(gif_source)
                 Dim dimension As New FrameDimension(gifImage.FrameDimensionsList(0))
                 Dim frameCount As Integer = gifImage.GetFrameCount(dimension)
 
